@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04 · Fighting Fires with Wildfire Simulations</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav id="main-nav">
+  <a class="nav-logo" href="../index.html">WRM Lab</a>
+  <ul class="nav-links"></ul>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-num-large">04</div>
+    <div class="page-hero-inner">
+      <div class="page-breadcrumb">
+        <a href="../index.html">Home</a><span>/</span><span>Project 04</span><span>/</span><span>Simulations</span>
+      </div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fire-red); margin-bottom:1rem;">🔥 Local Scale · Fire Modeling · LA 2025</div>
+      <h1 class="page-title">Fighting Fires with <em>Wildfire Simulations</em></h1>
+      <p class="page-subtitle">Wind plays a crucial role in fire behavior, yet most operational fire spread models assume constant wind. We couple Cell2Fire with WindNinja to produce downscaled, spatially-explicit wind fields — applied to the 2025 Palisades Fire's first 32 hours of most rapid spread.</p>
+      <div class="stats-row" style="margin-top:2rem; max-width:700px;">
+        <div class="stat-item"><span class="stat-num">32hr</span><span class="stat-label">Most Rapid Spread Window</span></div>
+        <div class="stat-item"><span class="stat-num">30m</span><span class="stat-label">Wind Field Resolution</span></div>
+        <div class="stat-item"><span class="stat-num">60mph</span><span class="stat-label">Peak Wind Speed</span></div>
+        <div class="stat-item"><span class="stat-num">C2F-M</span><span class="stat-label">Best Simulation Config</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-area">
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Background</span>
+        <span class="block-title">The 2025 Palisades Fire</span>
+      </div>
+      <div class="block-text">
+        <p>The Palisades Fire ignited on Tuesday, January 7, 2025, around 10:30 AM local time. Initial fire spread went south, heading southeast through a small canyon. Severe drought conditions (relative humidity &lt;15%) and strong Santa Ana winds propelled fire spread and drove embers, leading to severe urban conflagration within the first 24 hours.</p>
+        <p>Following the initial spread southward towards the coast, the fire spread laterally westward on the lee side of mountains. Strong, sustained wind speeds and complex wind-terrain interactions pushed the fire further west. The first 32 hours exhibited the most rapid and consequential spread.</p>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Method</span>
+        <span class="block-title">Cell2Fire + WindNinja: Offline Coupling</span>
+      </div>
+      <div class="block-text">
+        <p><strong style="color:var(--bone)">WindNinja</strong> generates downscaled wind field data at each temporal step in the Cell2Fire simulation — called "offline" coupling because WindNinja interacts with Cell2Fire outside of the simulation logic, preparing spatially-explicit input wind fields.</p>
+        <p>Wind data from the 3-km High-Resolution Rapid Refresh (HRRR) weather model was downscaled to <strong style="color:var(--bone)">30-m resolution</strong> using WindNinja's physics-based solvers that conserve mass (and optionally momentum). 32 wind field grids were produced for each solver type.</p>
+        <p>Three simulation configurations were compared: Cell2Fire only (C2F), C2F with mass solver (C2F-M), and C2F with both mass and momentum solvers (C2F-MM).</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.07); border-radius:4px; overflow:hidden; margin:1.5rem 0;">
+        <div style="background:#1A1612; padding:1.5rem; text-align:center;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--ash); margin-bottom:0.5rem;">Input</div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; color:var(--bone);">HRRR 3km</div>
+          <div style="font-size:0.75rem; color:var(--ash); margin-top:0.25rem;">NWP Weather Model</div>
+        </div>
+        <div style="background:#1A1612; padding:1.5rem; text-align:center; position:relative;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--fire-orange); margin-bottom:0.5rem;">Downscaling</div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; color:var(--bone);">WindNinja 30m</div>
+          <div style="font-size:0.75rem; color:var(--ash); margin-top:0.25rem;">Mass / Momentum Solver</div>
+        </div>
+        <div style="background:#1A1612; padding:1.5rem; text-align:center;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--fire-red); margin-bottom:0.5rem;">Simulation</div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; color:var(--bone);">Cell2Fire</div>
+          <div style="font-size:0.75rem; color:var(--ash); margin-top:0.25rem;">Spatially-Explicit Spread</div>
+        </div>
+      </div>
+
+      <div class="plots-grid">
+        <div class="plot-card" onclick="alert('Link your WindNinja wind field visualization here.')">
+          <div class="plot-card-preview">💨</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Downscaled Wind Fields</div>
+            <div class="plot-card-desc">Aggregated wind field visualization — average wind speed [mph] across all 32 time steps.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your wind speed time series here.')">
+          <div class="plot-card-preview">📈</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Wind Speed Over Time</div>
+            <div class="plot-card-desc">Mean wind speed [mph] across 32 hours — peaking after 10 hours, predominantly southwest.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Results</span>
+        <span class="block-title">Simulation Accuracy Comparison</span>
+      </div>
+      <div class="block-text">
+        <p>The <strong style="color:var(--fire-red)">C2F with mass solver (C2F-M) produced the best overall simulation</strong>. C2F-only and C2F with both solvers (C2F-MM) led to significant underestimation in the western direction. C2F-M recorded burned area pixels most accurately over time, though it also overestimated the most after ~15 hours.</p>
+        <p>Overestimation may be preferred for <strong style="color:var(--bone)">risk-averse decision makers</strong>. After 25 hours, C2F-MM became more accurate due to less overestimation, suggesting a potential hybrid approach.</p>
+      </div>
+      <div class="plots-grid">
+        <div class="plot-card" onclick="alert('Link your simulation result maps (C2F, C2F-M, C2F-MM) here.')">
+          <div class="plot-card-preview">🔥</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Simulation Result Maps</div>
+            <div class="plot-card-desc">Elapsed time maps for C2F Only, C2F with Mass Solver, and C2F with Mass + Momentum Solver.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your burned area time series comparison here.')">
+          <div class="plot-card-preview">📊</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Burned Area Over Time</div>
+            <div class="plot-card-desc">Cumulative burned area [km²] across all three configurations vs. observed — accurate, overestimated, underestimated zones.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your difference maps (accurate/over/under-estimation) here.')">
+          <div class="plot-card-preview">🎯</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Accuracy Difference Maps</div>
+            <div class="plot-card-desc">Spatial maps of accurate, overestimated, and underestimated cells per simulation configuration.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block" style="border-bottom:none;">
+      <div class="finding-callout">
+        <p>Offline coupling of Cell2Fire with WindNinja provides downscaled, spatially-explicit wind fields to improve simulations during the initial wind-driven major fire spread event (32-hour window).</p>
+        <div class="finding-source">Key Conclusion · Wildfire Simulations</div>
+      </div>
+      <div class="block-text" style="margin-top:1.5rem;">
+        <p><strong style="color:var(--bone)">References:</strong></p>
+        <p style="font-size:0.8rem;">Kim, Pais &amp; Gonzalez (2025). Fire spread simulations using Cell2Fire on synthetic and real landscapes. Scientific Reports, 15(1), 25173.</p>
+        <p style="font-size:0.8rem;">Pais et al. (2021). Cell2Fire: A cell-based forest fire growth model. Frontiers in Forests and Global Change, 4, 692706.</p>
+        <p style="font-size:0.8rem;">Wagenbrenner et al. (2016). Downscaling surface wind predictions from NWP models. Atmospheric Chemistry and Physics, 16(8), 5229–5241.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-nav">
+    <a href="03-extreme-fires.html" class="page-nav-btn">← 03 · Extreme Fires</a>
+    <a href="05-risk-networks.html" class="page-nav-btn">05 · Risk Networks →</a>
+  </div>
+</div>
+
+<footer>
+  <div><a class="footer-logo" href="../index.html">WRM Lab</a><div>Project 04 · Fighting Fires with Wildfire Simulations</div></div>
+  <div><a href="https://github.com/minhokim93/Lau_WRM" style="color:var(--fire-red);text-decoration:none;" target="_blank">GitHub →</a></div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>buildNav('04-simulations');</script>
+</body>
+</html>

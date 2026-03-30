@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>06 · Mitigating Risk as Shared Responsibility</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav id="main-nav">
+  <a class="nav-logo" href="../index.html">WRM Lab</a>
+  <ul class="nav-links"></ul>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-num-large">06</div>
+    <div class="page-hero-inner">
+      <div class="page-breadcrumb">
+        <a href="../index.html">Home</a><span>/</span><span>Project 06</span><span>/</span><span>Shared Responsibility</span>
+      </div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fire-red); margin-bottom:1rem;">🏘️ Neighborhood Scale · Community Planning</div>
+      <h1 class="page-title">Mitigating Risk as <em>Shared Responsibility</em></h1>
+      <p class="page-subtitle">Defensible spaces are confined to property boundaries — but fire isn't. We rethink defensible spaces as overlapping buffers and develop spatial responsibility networks that quantify who owes what to whom in wildfire risk mitigation.</p>
+      <div class="stats-row" style="margin-top:2rem; max-width:700px;">
+        <div class="stat-item"><span class="stat-num">PR</span><span class="stat-label">Personal Responsibility</span></div>
+        <div class="stat-item"><span class="stat-num">SR</span><span class="stat-label">Shared Responsibility</span></div>
+        <div class="stat-item"><span class="stat-num">OR</span><span class="stat-label">Owed Responsibility</span></div>
+        <div class="stat-item"><span class="stat-num">ft³/min</span><span class="stat-label">Risk Unit (ROS × Area)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-area">
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Problem</span>
+        <span class="block-title">Fixed Boundaries Are Meaningless to Fire</span>
+      </div>
+      <div class="block-text">
+        <p>Defensible spaces are maintained to clear flammable fuels and reduce ignition probability. By definition, defensible space is constrained to a property parcel's boundaries. But for fire, these fixed boundaries are <strong style="color:var(--fire-red)">meaningless</strong> — ignitions in neighboring properties can place nearby homeowners at risk regardless of what they do on their own land.</p>
+        <p>Wildfire risk mitigation must be considered as a multi-parcel assessment. However, homeowners may not recognize the spillover effects of unmitigated hazards, or understand the complex overlapping risk regions between neighbors.</p>
+        <p>This project reframes risk as <strong style="color:var(--bone)">"responsibility"</strong> and develops new spatial metrics that measure each homeowner's responsibility to mitigate wildfire risk according to shared and owed regions.</p>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Method</span>
+        <span class="block-title">From Defensible Spaces to Responsibility Zones</span>
+      </div>
+      <div class="block-text">
+        <p>Three responsibility types are defined by the spatial geometry of overlapping defensible space buffers:</p>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; margin:1.5rem 0;">
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:1.25rem; border-radius:4px; border-top:2px solid var(--sky);">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--sky); margin-bottom:0.5rem;">PR</div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; color:var(--bone); margin-bottom:0.5rem;">Personal Responsibility</div>
+          <div style="font-size:0.8rem; color:var(--ash);">The defensible space unique to a homeowner's property — not overlapping with any neighbors.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:1.25rem; border-radius:4px; border-top:2px solid var(--ember);">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--ember); margin-bottom:0.5rem;">SR</div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; color:var(--bone); margin-bottom:0.5rem;">Shared Responsibility</div>
+          <div style="font-size:0.8rem; color:var(--ash);">Overlapping regions between neighbors — risk that both homeowners contribute to and must mitigate together.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:1.25rem; border-radius:4px; border-top:2px solid var(--fire-red);">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--fire-red); margin-bottom:0.5rem;">OR</div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; color:var(--bone); margin-bottom:0.5rem;">Owed Responsibility</div>
+          <div style="font-size:0.8rem; color:var(--ash);">Overlap from a neighbor's defensible space encroaching onto another's — risk that one homeowner "owes" mitigation for.</div>
+        </div>
+      </div>
+      <div class="block-text">
+        <p>Metrics are calculated as the product of spatial overlap [ft²] and the fire spread risk (Rate of Spread, ft/min) within that region, derived from FLAMMAP fire behavior simulations. SR and OR are measured in ft³/min — analogous to water accumulating in a rain gauge over time.</p>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Method</span>
+        <span class="block-title">Responsibility Networks: Who, Where, With Whom?</span>
+      </div>
+      <div class="block-text">
+        <p>Rather than computing simple raster products per property, we build <strong style="color:var(--bone)">spatial directed networks of responsibility</strong>. Nodes represent each property (sized by PR). Directed edges represent SR or OR between adjacent neighbors — the direction denoting who owes mitigation to whom.</p>
+        <p>This network representation captures the interconnectivity between neighbors: who needs to collaborate with whom, and where the highest-risk overlapping zones are located across the community.</p>
+      </div>
+      <div class="plots-grid">
+        <div class="plot-card" onclick="alert('Link your SR responsibility network visualization here.')">
+          <div class="plot-card-preview">🕸️</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Shared Responsibility Network</div>
+            <div class="plot-card-desc">Spatial directed network with edges sized by SR — identifying neighbor clusters that must mitigate together.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your OR responsibility network visualization here.')">
+          <div class="plot-card-preview">🔴</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Owed Responsibility Network</div>
+            <div class="plot-card-desc">OR network showing hotspot parcels where one neighbor's unmitigated risk falls on another.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your responsibility spatial maps (PR, SR, OR) here.')">
+          <div class="plot-card-preview">🗺️</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Responsibility Spatial Maps</div>
+            <div class="plot-card-desc">Side-by-side spatial maps of PR, SR, and OR across the study neighborhood.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Results</span>
+        <span class="block-title">Network Dismantling &amp; Mitigation Strategies</span>
+      </div>
+      <div class="block-text">
+        <p>To simulate neighborhood-scale mitigation, network edges are iteratively removed and the total SR (or OR) and number of disconnected sub-networks are monitored. Three strategies are compared:</p>
+        <p><strong style="color:var(--bone)">Random</strong> — edges selected randomly (simulates ad-hoc awareness). <strong style="color:var(--bone)">Localized</strong> — first edge random, then adjacent edges (simulates word-of-mouth). <strong style="color:var(--fire-red)">Targeted</strong> — edges selected by descending SR or OR value (simulates data-driven allocation).</p>
+        <p>Targeted mitigation reduces community-wide SR and OR most rapidly in both networks, followed by localized and random. The SR network exhibits multiple sub-networks; the OR network exhibits hotspot parcels — each requiring different collaborative strategies.</p>
+      </div>
+      <div class="plots-grid">
+        <div class="plot-card" onclick="alert('Link your SR network dismantling charts (Random/Localized/Targeted) here.')">
+          <div class="plot-card-preview">📊</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">SR Network Dismantling</div>
+            <div class="plot-card-desc">Total SR (%) vs. fraction of links removed for all three mitigation strategies. AUC comparison.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your OR network dismantling charts here.')">
+          <div class="plot-card-preview">📉</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">OR Network Dismantling</div>
+            <div class="plot-card-desc">Total OR (%) vs. fraction of links removed — targeted strategy achieves lowest AUC (best efficiency).</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block" style="border-bottom:none;">
+      <div class="finding-callout">
+        <p>Spatial responsibility networks identify who, with whom, and where wildfire risk is shared and owed at the neighborhood scale, enabling targeted strategies for community planning and collaboration.</p>
+        <div class="finding-source">Key Conclusion · Shared Responsibility</div>
+      </div>
+      <div class="block-text" style="margin-top:1.5rem;">
+        <p><strong style="color:var(--bone)">References:</strong></p>
+        <p style="font-size:0.8rem;">Kim, Raine, Radke &amp; Gonzalez (2025). A Network Approach to Mapping Responsibility in Wildfire Risk Mitigation. Under review in Landscape and Urban Planning.</p>
+        <p style="font-size:0.8rem;">Maranghides et al. (2022). WUI Structure/parcel/community fire hazard mitigation methodology. NIST, US Department of Commerce.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-nav">
+    <a href="05-risk-networks.html" class="page-nav-btn">← 05 · Risk Networks</a>
+    <a href="../index.html" class="page-nav-btn">↩ Back to Home</a>
+  </div>
+</div>
+
+<footer>
+  <div><a class="footer-logo" href="../index.html">WRM Lab</a><div>Project 06 · Mitigating Risk as Shared Responsibility</div></div>
+  <div><a href="https://github.com/minhokim93/Lau_WRM" style="color:var(--fire-red);text-decoration:none;" target="_blank">GitHub →</a></div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>buildNav('06-responsibility');</script>
+</body>
+</html>

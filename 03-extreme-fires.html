@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03 · Are Extreme Fires Unprecedented or Unexpected?</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav id="main-nav">
+  <a class="nav-logo" href="../index.html">WRM Lab</a>
+  <ul class="nav-links"></ul>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-num-large">03</div>
+    <div class="page-hero-inner">
+      <div class="page-breadcrumb">
+        <a href="../index.html">Home</a><span>/</span><span>Project 03</span><span>/</span><span>Korea 2025</span>
+      </div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fire-red); margin-bottom:1rem;">🇰🇷 Regional Scale · Case Study · March 2025</div>
+      <h1 class="page-title">Are Extreme Fires <em>Unprecedented or Unexpected?</em></h1>
+      <p class="page-subtitle">The March 2025 wildfire in North Gyeongsang province, South Korea, was the most extreme and damaging fire in the nation's history. By benchmarking against global databases, we show that extreme fires can occur even in unexpected geographies.</p>
+      <div class="stats-row" style="margin-top:2rem; max-width:800px;">
+        <div class="stat-item"><span class="stat-num">32</span><span class="stat-label">Fatalities</span></div>
+        <div class="stat-item"><span class="stat-num">5,000+</span><span class="stat-label">Buildings Damaged</span></div>
+        <div class="stat-item"><span class="stat-num">100K ha</span><span class="stat-label">Burned in One Week</span></div>
+        <div class="stat-item"><span class="stat-num">$1.2B</span><span class="stat-label">Estimated Costs (USD)</span></div>
+        <div class="stat-item"><span class="stat-num">99th</span><span class="stat-label">Global Percentile (Spread Rate)</span></div>
+        <div class="stat-item"><span class="stat-num">3rd</span><span class="stat-label">Fastest vs. US Megafires</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-area">
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Background</span>
+        <span class="block-title">An Unexpected Geography of Fire</span>
+      </div>
+      <div class="block-text">
+        <p>South Korea is globally recognized for K-Pop, K-Drama, and K-Movies — not catastrophic wildfires. Yet the country has experienced continuous seasons of record-breaking fires: 2019, 2022, and 2025. The March 2025 wildfire in Uiseong-Andong county (North Gyeongsang province) became the most extreme and damaging in the nation's history.</p>
+        <p>The fire occurred <strong style="color:var(--fire-red)">months before the anticipated fire season</strong>. It spread into the wildland urban interface, driven by Foehn winds and extreme fire behavior, culminating in 32 fatalities, over 5,000 buildings damaged, and more than 100,000 ha of burned area in a single week. Thousand-year-old temples and national heritage sites were among the losses.</p>
+      </div>
+      <div class="finding-callout">
+        <p>"This wildfire has exposed the reality of a climate crisis unlike anything we've experienced before."</p>
+        <div class="finding-source">— Han-Kyung Lee, Deputy Chief, Ministry of the Interior and Safety</div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Analysis</span>
+        <span class="block-title">How Unprecedented? Global Benchmarking</span>
+      </div>
+      <div class="block-text">
+        <p>Maximum daily fire spread (km²/day) is increasingly used to characterize "fast fires" — highly linked with more destructive outcomes. When compared to a 20-year global fire dataset (Mahood et al., 2022), the Korea fire ranks in the <strong style="color:var(--fire-red)">99th percentile of the fastest-growing fires globally</strong>, underscoring how extreme yet unusual an event it was for this geography.</p>
+        <p>Benchmarked against the top-100 US megafires (Balch et al., 2024), the Korea fire is ranked as the <strong style="color:var(--fire-red)">3rd fastest fire</strong> — faster than the 2018 Camp Fire, 2020 North Complex, and 2020 August Complex Fires in California.</p>
+      </div>
+      <div class="plots-grid" style="margin-top:1.5rem;">
+        <div class="plot-card" onclick="alert('Link your global fire spread scatter plot (Korea highlighted) here.')">
+          <div class="plot-card-preview">⭐</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Global Fire Spread Benchmarking</div>
+            <div class="plot-card-desc">Total fire size vs. max daily spread for 20-year global dataset with Korea 2025 highlighted at 99th percentile.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your top-100 US megafires comparison plot here.')">
+          <div class="plot-card-preview">🏆</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Top-100 US Megafires Comparison</div>
+            <div class="plot-card-desc">Korea 2025 ranked 3rd fastest among the top-100 US megafires by max daily spread rate.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Analysis</span>
+        <span class="block-title">Fire Progression &amp; Burn Severity</span>
+      </div>
+      <div class="block-text">
+        <p>Fire progression was analyzed via temporal isochrones derived from satellite imagery. Burn severity was mapped using delta Normalized Burn Ratio (dNBR) from harmonized Sentinel-2/Landsat-8 imagery. Pre-fire imagery was compared with post-fire imagery acquired on April 1 and 8, 2025.</p>
+        <p>The fire's progression shows initial spread southward in the first 24 hours, followed by rapid expansion as wind conditions intensified. Cumulative burned area exceeded 100,000 ha within the first week.</p>
+      </div>
+      <div class="plots-grid" style="margin-top:1.5rem;">
+        <div class="plot-card" onclick="alert('Link your fire isochrone map here.')">
+          <div class="plot-card-preview">🗺️</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Fire Progression Isochrones</div>
+            <div class="plot-card-desc">Temporal isochrones showing fire spread colored by time step from ignition.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your dNBR burn severity map here.')">
+          <div class="plot-card-preview">🔴</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Burn Severity (dNBR)</div>
+            <div class="plot-card-desc">Delta Normalized Burn Ratio from harmonized Sentinel-2/Landsat-8 pre/post imagery.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your burned area cumulative chart here.')">
+          <div class="plot-card-preview">📊</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Burned Area Over Time</div>
+            <div class="plot-card-desc">Burned area per time step and cumulative total — with dNBR distribution boxplots per interval.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Finding</span>
+        <span class="block-title">How Unexpected? Unusually Hot, Dry &amp; Windy</span>
+      </div>
+      <div class="block-text">
+        <p>Fire weather conditions were compared against a <strong style="color:var(--bone)">35-year climatology (1990–2024)</strong>. Temperature anomaly reached +9.2°C above the March baseline, relative humidity was −12.9% below normal, wind speed was +1.7 m/s above average, and boundary layer height (BLH) was +179.4 m above baseline — all simultaneously on the peak fire day (March 22).</p>
+        <p>Monthly and peak-day anomaly maps confirm that the fire was driven by concurrent extreme departures from historical norms across all relevant meteorological variables — a true compound extreme event.</p>
+      </div>
+      <div class="plots-grid" style="margin-top:1.5rem;">
+        <div class="plot-card" onclick="alert('Link your climate anomaly comparison chart here.')">
+          <div class="plot-card-preview">🌡️</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Meteorological Anomalies</div>
+            <div class="plot-card-desc">Temperature, humidity, wind speed, and BLH compared across 35-year baseline, March 2025 monthly mean, and peak fire day.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your spatial anomaly maps here.')">
+          <div class="plot-card-preview">🗺️</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Spatial Anomaly Maps</div>
+            <div class="plot-card-desc">Spatial extent of meteorological anomalies for March 2025 monthly mean and March 22 peak day.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block" style="border-bottom:none;">
+      <div class="finding-callout">
+        <p>Extreme fires may no longer be unprecedented in South Korea, as fires occurring at unexpected times and places increase the chance of incurring catastrophic damages and costs if not well prepared for.</p>
+        <div class="finding-source">Key Conclusion · Korea 2025 Case Study</div>
+      </div>
+      <div class="block-text" style="margin-top:1.5rem;">
+        <p><strong style="color:var(--bone)">References:</strong></p>
+        <p style="font-size:0.8rem;">Balch et al. (2024). The fastest-growing and most destructive fires in the US (2001 to 2020). Science, 386(6720), 425–431.</p>
+        <p style="font-size:0.8rem;">Mahood et al. (2022). Country-level fire perimeter datasets (2001–2021). Scientific Data, 9(1), 458.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-nav">
+    <a href="02-fire-weather.html" class="page-nav-btn">← 02 · Fire Weather Risk</a>
+    <a href="04-simulations.html" class="page-nav-btn">04 · Wildfire Simulations →</a>
+  </div>
+</div>
+
+<footer>
+  <div><a class="footer-logo" href="../index.html">WRM Lab</a><div>Project 03 · Extreme Fires — Korea 2025</div></div>
+  <div><a href="https://github.com/minhokim93/Lau_WRM" style="color:var(--fire-red);text-decoration:none;" target="_blank">GitHub →</a></div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>buildNav('03-extreme-fires');</script>
+</body>
+</html>

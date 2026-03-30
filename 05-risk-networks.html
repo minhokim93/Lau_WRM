@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05 · Fighting Fires with Fire Potential Risk Networks</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav id="main-nav">
+  <a class="nav-logo" href="../index.html">WRM Lab</a>
+  <ul class="nav-links"></ul>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-num-large">05</div>
+    <div class="page-hero-inner">
+      <div class="page-breadcrumb">
+        <a href="../index.html">Home</a><span>/</span><span>Project 05</span><span>/</span><span>Risk Networks</span>
+      </div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fire-red); margin-bottom:1rem;">🗺️ Operational · Decision Support · Catalan Fire Service</div>
+      <h1 class="page-title">Fighting Fires with <em>Fire Potential Risk Networks</em></h1>
+      <p class="page-subtitle">As fires grow more extreme and complex, proactive risk-informed strategies are imperative. We collaborated with the Catalan Fire Service (Spain) to automate fire potential polygon generation and deploy the model in real wildfire operations.</p>
+      <div class="stats-row" style="margin-top:2rem; max-width:700px;">
+        <div class="stat-item"><span class="stat-num">FPP</span><span class="stat-label">Fire Potential Polygons</span></div>
+        <div class="stat-item"><span class="stat-num">68 ha</span><span class="stat-label">Case Study Fire (4.5 hrs)</span></div>
+        <div class="stat-item"><span class="stat-num">Proactive</span><span class="stat-label">Best Suppression Strategy</span></div>
+        <div class="stat-item"><span class="stat-num">Spain</span><span class="stat-label">Deployed Operationally</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-area">
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Problem</span>
+        <span class="block-title">Manual Risk Zones Are Insufficient</span>
+      </div>
+      <div class="block-text">
+        <p>Current risk management approaches rely on <strong style="color:var(--fire-red)">manual drawing of risk management zones</strong> and expert judgment on fire behavior. Fire potential polygons (FPPs) are drawn by analysts on the landscape for risk management and planning — a process that is tedious, requires high expertise, and introduces drawing bias.</p>
+        <p>We collaborated with the Catalan Fire Service to <strong style="color:var(--bone)">automate and streamline the risk management process</strong> by coupling fire spread simulation with hydrology-inspired polygon extraction. The model was then deployed in real wildfire operations to empower fire suppression tactics and decision-making.</p>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Method</span>
+        <span class="block-title">Hydrology-Inspired Fire Potential Polygons</span>
+      </div>
+      <div class="block-text">
+        <p>The key insight: <strong style="color:var(--bone)">fire spread behaves analogously to water flow</strong>. Just as water flows from high elevation to low elevation (forming basins), fire spreads from points of early ignition time to points of later arrival. By treating fire spread time as an inverted elevation surface, hydrological basin algorithms can automatically delineate Fire Potential Polygons (FPPs).</p>
+        <p>The process: (1) Run Cell2Fire simulation → (2) Generate elapsed time surface → (3) Compute flow direction using D8 algorithm → (4) Extract "reversed basins" as FPPs. The resulting polygons capture the natural fire spread pathways across complex terrain.</p>
+      </div>
+      <div class="plots-grid">
+        <div class="plot-card" onclick="alert('Link your FPP generation visualization here.')">
+          <div class="plot-card-preview">🏔️</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">FPP Generation Pipeline</div>
+            <div class="plot-card-desc">Step-by-step: elevation → fire spread time → spread direction → delineated fire potential polygons.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your case study map (Vilanova de Meià) here.')">
+          <div class="plot-card-preview">🇪🇸</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Case Study: Vilanova de Meià</div>
+            <div class="plot-card-desc">August 2024 wildfire in Spain — predominantly shrubs/grasses, 68 ha over 4.5 hours with surrounding villages.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Results</span>
+        <span class="block-title">Proactive vs. Reactive Suppression Strategies</span>
+      </div>
+      <div class="block-text">
+        <p>The case study compared four suppression strategies alongside a prescribed burn, in response to socio-political pressure from local government to protect farmland and nearby towns (Artesa de Segre, population 3,447).</p>
+        <p>The <strong style="color:var(--bone)">reactive strategy (SR)</strong> suppressed the fire's right flank to slow eastward spread. The <strong style="color:var(--fire-red)">proactive strategy</strong> used fire potential polygon networks to (1) suppress the left flank to slow westward spread (tactics S1–S4) and (2) block potential new fire paths from emerging.</p>
+        <p>Proactive decision-making consistently achieved the most time gained against fire progression, enabling valuable windows for evacuation, resource deployment, and containment.</p>
+      </div>
+      <div class="plots-grid">
+        <div class="plot-card" onclick="alert('Link your suppression scenarios elapsed time map here.')">
+          <div class="plot-card-preview">⏱️</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Suppression Scenario Comparison</div>
+            <div class="plot-card-desc">Elapsed time maps: No Suppression, Prescribed Burn, Reactive (SR), and Proactive (SP) strategies.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your cumulative distribution of elapsed time change here.')">
+          <div class="plot-card-preview">📊</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">CDF of Time Gained</div>
+            <div class="plot-card-desc">Cumulative distribution functions of elapsed time change per tactic vs. no suppression baseline.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your dynamic FPP network visualization here.')">
+          <div class="plot-card-preview">🕸️</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Dynamic FPP Network</div>
+            <div class="plot-card-desc">Pre- and post-suppression networks showing elapsed time and time gained per polygon in descending order.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block" style="border-bottom:none;">
+      <div class="finding-callout">
+        <p>Fire potential polygons and networks can revolutionize operational fire management to design proactive tactics that can significantly delay fire progression and gain valuable time for fire suppression.</p>
+        <div class="finding-source">Key Conclusion · Fire Potential Risk Networks</div>
+      </div>
+      <div class="block-text" style="margin-top:1.5rem;">
+        <p><strong style="color:var(--bone)">References:</strong></p>
+        <p style="font-size:0.8rem;">Castellnou et al. (2019). Empowering strategic decision-making for wildfire management. Fire Ecology, 15(1), 31.</p>
+        <p style="font-size:0.8rem;">Kim, Castellnou &amp; González (2025). Modeling potential fire spread polygons and networks for suppression strategies. International Journal of Disaster Risk Reduction, 105853.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-nav">
+    <a href="04-simulations.html" class="page-nav-btn">← 04 · Simulations</a>
+    <a href="06-responsibility.html" class="page-nav-btn">06 · Shared Responsibility →</a>
+  </div>
+</div>
+
+<footer>
+  <div><a class="footer-logo" href="../index.html">WRM Lab</a><div>Project 05 · Fire Potential Risk Networks</div></div>
+  <div><a href="https://github.com/minhokim93/Lau_WRM" style="color:var(--fire-red);text-decoration:none;" target="_blank">GitHub →</a></div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>buildNav('05-risk-networks');</script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02 · Dynamic Evolution of Fire Weather Risk</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌡️</text></svg>">
+</head>
+<body>
+<nav id="main-nav">
+  <a class="nav-logo" href="../index.html">WRM Lab</a>
+  <ul class="nav-links"></ul>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-num-large">02</div>
+    <div class="page-hero-inner">
+      <div class="page-breadcrumb">
+        <a href="../index.html">Home</a><span>/</span><span>Project 02</span><span>/</span><span>Fire Weather Risk</span>
+      </div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fire-red); margin-bottom:1rem;">🌡️ Global Scale · Climate Analysis</div>
+      <h1 class="page-title">Dynamic Evolution of <em>Fire Weather Risk</em></h1>
+      <p class="page-subtitle">Wildfire risk is changing spatiotemporally on a global scale due to growing fire weather risk. Days when weather conditions exceed a high-danger threshold are quantified as "Synchronous Fire Weather" (SFW) days — and these are increasing globally.</p>
+      <div class="stats-row" style="margin-top:2rem; max-width:700px;">
+        <div class="stat-item"><span class="stat-num">FWI</span><span class="stat-label">Fire Weather Index</span></div>
+        <div class="stat-item"><span class="stat-num">VPD↑</span><span class="stat-label">Vapor Pressure Deficit Rising</span></div>
+        <div class="stat-item"><span class="stat-num">SPEI↓</span><span class="stat-label">Drying Trend Accelerating</span></div>
+        <div class="stat-item"><span class="stat-num">8.6%</span><span class="stat-label">Global Mean Ω (Fire|SFW)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-area">
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Background</span>
+        <span class="block-title">What is Synchronous Fire Weather?</span>
+      </div>
+      <div class="block-text">
+        <p><strong style="color:var(--bone)">Synchronous Fire Weather (SFW)</strong> defines concurrent climate extremes or spatially compound events which can significantly intensify hazards and exacerbate impacts. SFW is measured as the average number of days per year where local weather conditions exceed a high-danger threshold.</p>
+        <p>This threshold is derived from a <strong style="color:var(--bone)">40-year baseline climatology</strong> of the Fire Weather Index (FWI) — a composite meteorological metric combining temperature, humidity, wind speed, and drought codes to estimate fire danger.</p>
+        <p>Three severity levels are assessed: severe (FWI90), extreme (FWI95), and catastrophic (FWI99) conditions, based on the 90th, 95th, and 99th percentile of the 40-year baseline at each grid cell.</p>
+      </div>
+
+      <div class="finding-callout">
+        <p>"If a fire season is increasing and eventually overlapping, it will shrink the window of opportunity to help each other in terms of firefighting."</p>
+        <div class="finding-source">— Cong Yin, Climate Scientist, University of California, Merced</div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Method</span>
+        <span class="block-title">How SFW Days Are Computed</span>
+      </div>
+      <div class="block-text">
+        <p>For each grid cell, the historical FWI distribution is derived from a 40-year baseline. Each daily FWI value is compared against the baseline threshold (e.g., FWI90). Days exceeding the threshold are counted as SFW days, and averaged per year.</p>
+        <p>A <strong style="color:var(--bone)">synchronicity ratio</strong> is further computed based on SFW per month per pyrome, using a "sync threshold" that determines the proportion of minimum SFW grid cells that must be active simultaneously for the event to be considered synchronous.</p>
+      </div>
+      <div class="plots-grid" style="margin-top:1.5rem;">
+        <div class="plot-card" onclick="alert('Link your SFW computation diagram / FWI global map here.')">
+          <div class="plot-card-preview">🌡️</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Global FWI Distribution Map</div>
+            <div class="plot-card-desc">Spatial distribution of average annual Fire Weather Index across the globe.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your SFW days per pyrome time series here.')">
+          <div class="plot-card-preview">📅</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">SFW Days per Pyrome</div>
+            <div class="plot-card-desc">Average annual SFW days by pyrome class, across sync thresholds (20–50%).</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your synchronicity ratio heatmap here.')">
+          <div class="plot-card-preview">🔥</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Monthly Synchronicity Heatmap</div>
+            <div class="plot-card-desc">Synchronicity ratio per month per pyrome — revealing seasonal fire weather windows.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Finding</span>
+        <span class="block-title">Warming &amp; Drying Trends Promote Fire Risk</span>
+      </div>
+      <div class="block-text">
+        <p>Global annual average measurements show the escalation of fire weather risk accelerating from 2020 onwards. Vapor Pressure Deficit (VPD) demonstrates a statistically significant rising trend (+0.0013 kPa/yr), while the Standardized Precipitation-Evapotranspiration Index (SPEI) shows a sharp drying trend (slope: −0.0010/yr).</p>
+        <p>These combined trends — hotter and drier — create <strong style="color:var(--fire-red)">progressively more dangerous conditions</strong> for ignition and fire spread on an annual basis.</p>
+      </div>
+      <div class="plots-grid" style="margin-top:1.5rem;">
+        <div class="plot-card" onclick="alert('Link your VPD time series here.')">
+          <div class="plot-card-preview">💧</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">VPD Trend (2002–2025)</div>
+            <div class="plot-card-desc">Global average Vapor Pressure Deficit with 12-month moving average and trend line.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your SPEI time series here.')">
+          <div class="plot-card-preview">🌵</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">SPEI Drying Trend (2002–2025)</div>
+            <div class="plot-card-desc">Standardized Precipitation-Evapotranspiration Index showing accelerating drying.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your FWI time series here.')">
+          <div class="plot-card-preview">📈</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">FWI Escalation (2002–2025)</div>
+            <div class="plot-card-desc">Annual average Fire Weather Index — with sharp escalation post-2020.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-header">
+        <span class="block-tag">Finding</span>
+        <span class="block-title">Expected Fire Weather Risk (Ω)</span>
+      </div>
+      <div class="block-text">
+        <p>A new metric called <strong style="color:var(--bone)">Expected Fire Weather Risk (Ω)</strong> is computed as the conditional probability that fire occurs given SFW conditions. The global mean Ω = 0.086, meaning roughly 8.6% of SFW days see an actual fire occurrence at a given location.</p>
+        <p>This metric is compared with high-resolution global population data (WorldPop) at four-year intervals to assess the progression of human exposure. Countries with high risk × high population density — such as South Sudan, Mozambique, and Central African Republic in Africa, and Cambodia and Myanmar in Asia — face disproportionate exposure.</p>
+      </div>
+      <div class="plots-grid" style="margin-top:1.5rem;">
+        <div class="plot-card" onclick="alert('Link your expected fire weather risk by continent scatter plot here.')">
+          <div class="plot-card-preview">🌍</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Ω by Country Population</div>
+            <div class="plot-card-desc">Expected fire weather risk vs. country population (log scale) by continent — identifying high-exposure nations.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+        <div class="plot-card" onclick="alert('Link your population exposure by continent plot here.')">
+          <div class="plot-card-preview">👥</div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Population Exposure by Continent</div>
+            <div class="plot-card-desc">Annual high-danger days vs. % of grid cells with population, tracked across Africa, Asia, Europe, N. America, Oceania, S. America.</div>
+            <div class="plot-card-link">Open interactive plot →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block" style="border-bottom:none;">
+      <div class="finding-callout">
+        <p>Increasing synchronicity of severe fire weather conditions brew the "perfect storm" for extreme wildfires which may emerge in unexpected regions and cause more disproportionate impacts if unprepared.</p>
+        <div class="finding-source">Key Conclusion · Fire Weather Risk</div>
+      </div>
+      <div class="block-text" style="margin-top:1.5rem;">
+        <p><strong style="color:var(--bone)">References:</strong></p>
+        <p style="font-size:0.8rem;">Jones et al. (2022). Global and regional trends and drivers of fire under climate change. Reviews of Geophysics, 60(3).</p>
+        <p style="font-size:0.8rem;">Yin et al. (2026). Increasing synchronicity of global extreme fire weather. Science Advances, 12(8), eadx8813.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-nav">
+    <a href="01-pyrogeography.html" class="page-nav-btn">← 01 · Pyrogeography</a>
+    <a href="03-extreme-fires.html" class="page-nav-btn">03 · Extreme Fires →</a>
+  </div>
+</div>
+
+<footer>
+  <div><a class="footer-logo" href="../index.html">WRM Lab</a><div>Project 02 · Dynamic Evolution of Fire Weather Risk</div></div>
+  <div><a href="https://github.com/minhokim93/Lau_WRM" style="color:var(--fire-red);text-decoration:none;" target="_blank">GitHub →</a></div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>buildNav('02-fire-weather');</script>
+</body>
+</html>
