@@ -3,120 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WRM Lab | Wildfire Risk Management</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-  
+  <title>Wildfire Risk Mitigation — Multiscale Research</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
 </head>
 <body>
 
-  <nav id="main-nav">
-    <a href="index.html" class="nav-logo">Lau_WRM</a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Overview</a></li>
-      <li><a href="#projects">Research</a></li>
-      <li><a href="pages/01-pyrogeography.html">Pyrogeography</a></li>
-      <li><a href="https://github.com/minhokim93/Lau_WRM" target="_blank">Repository</a></li>
-    </ul>
-  </nav>
+<nav id="main-nav">
+  <a class="nav-logo" href="index.html">WRM Lab</a>
+  <ul class="nav-links" style="display: flex; gap: 0.5rem; list-style: none;">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="pages/01-pyrogeography.html">01 Pyrogeography</a></li>
+    <li><a href="pages/02-fire-weather.html">02 Fire Weather</a></li>
+    <li><a href="pages/03-extreme-fires.html">03 Extreme Fires</a></li>
+    <li><a href="pages/04-simulations.html">04 Simulations</a></li>
+    <li><a href="pages/05-risk-networks.html">05 Risk Networks</a></li>
+    <li><a href="pages/06-responsibility.html">06 Responsibility</a></li>
+  </ul>
+</nav>
 
-  <main>
-    <div class="slider-wrapper animate-in" id="projects">
-      <div class="slides-container" id="slides-container">
-        
-        <div class="slide" id="slide-00">
-          <div class="slide-num-label">/ 00</div>
-          <h2>Research Context</h2>
-          <div class="slide-content">
-            <p>Welcome to the Wildfire Risk Management (WRM) research portal. Our lab investigates global wildfire dynamics, identifying hidden exposure biases and visualizing spatial risk to improve management strategies.</p>
-          </div>
+<main style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 6rem 1.5rem 2rem;">
+  
+  <div class="slider-wrapper">
+    <div class="slides-container" id="slider">
+      
+      <div class="slide">
+        <div class="section-header">
+          <span class="section-num">00 —</span>
+          <span class="section-title">Research Context</span>
         </div>
-
-        <div class="slide" id="slide-01">
-          <div class="slide-num-label">/ 01</div>
-          <h2>Pyrogeography</h2>
-          <div class="slide-tags">
-            <span class="tag">Global</span>
-            <span class="tag">Bias Analysis</span>
-          </div>
-          <p class="slide-desc">Mapping hidden biases in human wildfire exposure. We visualize where risk is often overlooked.</p>
-          <a href="pages/01-pyrogeography.html" class="btn-primary">View Results →</a>
-        </div>
-
-        <div class="slide" id="slide-02">
-          <div class="slide-num-label">/ 02</div>
-          <h2>Fire Weather</h2>
-          <div class="slide-tags">
-            <span class="tag">Climatology</span>
-            <span class="tag">Interaction</span>
-          </div>
-          <p class="slide-desc">Analyzing fire weather patterns and their interaction with complex terrain.</p>
-          <a href="pages/02-fire-weather.html" class="btn-primary">View Results →</a>
-        </div>
-
-        <div class="slide" id="slide-03">
-          <div class="slide-num-label">/ 03</div>
-          <h2>Extreme Fires</h2>
-          <div class="slide-tags">
-            <span class="tag">Behavior</span>
-            <span class="tag">Modeling</span>
-          </div>
-          <p class="slide-desc">Understanding the dynamics of large, landscape-altering fire events.</p>
-          <a href="pages/03-extreme-fires.html" class="btn-primary">View Results →</a>
-        </div>
-
-        <div class="slide" id="slide-04">
-          <div class="slide-num-label">/ 04</div>
-          <h2>Simulations</h2>
-          <div class="slide-tags">
-            <span class="tag">Numerical</span>
-            <span class="tag">Real-time</span>
-          </div>
-          <p class="slide-desc">Utilizing powerful simulation engines to predict fire spread in complex environments.</p>
-          <a href="pages/04-simulations.html" class="btn-primary">View Results →</a>
-        </div>
-
-        <div class="slide" id="slide-05">
-          <div class="slide-num-label">/ 05</div>
-          <h2>Risk Networks</h2>
-          <div class="slide-tags">
-            <span class="tag">Connectivity</span>
-            <span class="tag">Policy</span>
-          </div>
-          <p class="slide-desc">Modeling wildfire risk as a dynamic network of interconnected, multi-scale vulnerabilities.</p>
-          <a href="pages/05-risk-networks.html" class="btn-primary">View Results →</a>
-        </div>
-
-        <div class="slide" id="slide-06">
-          <div class="slide-num-label">/ 06</div>
-          <h2>Responsibility</h2>
-          <div class="slide-tags">
-            <span class="tag">Ethics</span>
-            <span class="tag">Adaptation</span>
-          </div>
-          <p class="slide-desc">Exploring ethical frameworks and multi-level responsibility in wildfire risk reduction.</p>
-          <a href="pages/06-responsibility.html" class="btn-primary">View Results →</a>
-        </div>
-
+        <h1 style="font-family:'DM Serif Display',serif; font-size:clamp(2rem, 4vw, 3rem); line-height:1.1; margin-bottom:1.5rem;">
+          Multiscale Mitigation of <em style="color:var(--fire-red); font-style:italic;">Wildfire Risk</em>
+        </h1>
+        <p style="color:var(--ash); margin-bottom:1rem;">Wildfires represent one of the most dynamic and destructive natural hazards on Earth. Their behavior is shaped by an intricate interplay of climate, ecology, topography, and human settlement — and all of these factors are shifting simultaneously.</p>
+        <p style="color:var(--ash);">Swipe or use the arrows below to explore the 6 multiscale research projects, from global pyrogeographic shifts down to the neighborhood and parcel scale.</p>
       </div>
 
-      <div class="slider-footer">
-        <div class="slider-counter">[ <span id="current-slide-num">00</span> / 06 ]</div>
-        <div class="slider-arrows">
-          <button class="slider-arrow prev" id="slide-arrow-prev" disabled>&#8249;</button>
-          <button class="slider-arrow next" id="slide-arrow-next">&#8250;</button>
+      <div class="slide">
+        <div class="section-header">
+          <span class="section-num">01 —</span>
+          <span class="section-title">Global Scale</span>
         </div>
+        <h2 style="font-family:'Syne',sans-serif; font-size:2rem; margin-bottom:1rem;">Dynamic Evolution of Pyrogeography</h2>
+        <p style="color:var(--ash); margin-bottom:2rem;">Mapping hidden biases in human wildfire exposure and visualizing where risk is often overlooked on a global level.</p>
+        <a href="pages/01-pyrogeography.html" class="btn-outline">View Project 01 →</a>
       </div>
+
+      <div class="slide">
+        <div class="section-header">
+          <span class="section-num">02 —</span>
+          <span class="section-title">Global Scale</span>
+        </div>
+        <h2 style="font-family:'Syne',sans-serif; font-size:2rem; margin-bottom:1rem;">Fire Weather Risk</h2>
+        <p style="color:var(--ash); margin-bottom:2rem;">Analyzing fire weather patterns, shifting climates, and their complex interactions with global topographies.</p>
+        <a href="pages/02-fire-weather.html" class="btn-outline">View Project 02 →</a>
+      </div>
+
+      <div class="slide">
+        <div class="section-header">
+          <span class="section-num">03 —</span>
+          <span class="section-title">Regional Scale</span>
+        </div>
+        <h2 style="font-family:'Syne',sans-serif; font-size:2rem; margin-bottom:1rem;">Extreme Fires (Korea 2025)</h2>
+        <p style="color:var(--ash); margin-bottom:2rem;">Understanding the dynamics of large, landscape-altering fire events through the lens of recent catastrophic benchmarks.</p>
+        <a href="pages/03-extreme-fires.html" class="btn-outline">View Project 03 →</a>
+      </div>
+
+      <div class="slide">
+        <div class="section-header">
+          <span class="section-num">04 —</span>
+          <span class="section-title">Local Scale</span>
+        </div>
+        <h2 style="font-family:'Syne',sans-serif; font-size:2rem; margin-bottom:1rem;">Wildfire Simulations</h2>
+        <p style="color:var(--ash); margin-bottom:2rem;">Utilizing powerful simulation engines to model fire spread in complex environments and improve response strategies.</p>
+        <a href="pages/04-simulations.html" class="btn-outline">View Project 04 →</a>
+      </div>
+
+      <div class="slide">
+        <div class="section-header">
+          <span class="section-num">05 —</span>
+          <span class="section-title">Operational Scale</span>
+        </div>
+        <h2 style="font-family:'Syne',sans-serif; font-size:2rem; margin-bottom:1rem;">Risk Networks</h2>
+        <p style="color:var(--ash); margin-bottom:2rem;">Modeling wildfire risk as a dynamic network of interconnected, multi-scale vulnerabilities for proactive decision-making.</p>
+        <a href="pages/05-risk-networks.html" class="btn-outline">View Project 05 →</a>
+      </div>
+
+      <div class="slide">
+        <div class="section-header">
+          <span class="section-num">06 —</span>
+          <span class="section-title">Neighborhood Scale</span>
+        </div>
+        <h2 style="font-family:'Syne',sans-serif; font-size:2rem; margin-bottom:1rem;">Shared Responsibility</h2>
+        <p style="color:var(--ash); margin-bottom:2rem;">Exploring ethical frameworks and quantifying multi-level responsibility in community wildfire risk reduction.</p>
+        <a href="pages/06-responsibility.html" class="btn-outline">View Project 06 →</a>
+      </div>
+
     </div>
-  </main>
 
-  <footer>
-    <div>WRM Lab | Wildfire Risk Management.</div>
-  </footer>
+    <div class="slider-footer">
+      <button id="prevBtn" class="slider-btn">← Prev</button>
+      <span class="slider-counter">[ <span id="currentSlide">00</span> / 06 ]</span>
+      <button id="nextBtn" class="slider-btn">Next →</button>
+    </div>
+  </div>
 
-  <script src="main.js"></script>
+</main>
+
+<footer style="text-align: center; padding: 2rem; border-top: 1px solid rgba(232, 52, 26, 0.2); background: rgba(26, 22, 18, 0.85); margin-top: auto;">
+  <div style="font-family:'Syne',sans-serif; font-weight:700; color:var(--fire-red);">WRM Lab</div>
+  <div style="color:var(--ash); font-size:0.8rem; margin-top:0.5rem;">Multiscale Mitigation of Wildfire Risk in the Natural & Built Environments</div>
+</footer>
+
+<script src="main.js"></script>
 </body>
 </html>
