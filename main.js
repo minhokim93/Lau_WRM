@@ -37,8 +37,6 @@ function buildNav(activePage) {
 
 // Intersection observer for scroll animations
 document.addEventListener('DOMContentLoaded', () => {
-  
-  // 1. Existing Intersection Observer for sub-page scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(el => {
       if (el.isIntersecting) {
@@ -48,44 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.animate-in').forEach(el => {
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    el.style.opacity = '0';
     el.style.animationPlayState = 'paused';
+    el.classList.add('animate-in');
     observer.observe(el);
   });
-
-  // 2. Slider Logic for the Home Page
-  const slider = document.getElementById('slider');
-  if (slider) {
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const currentSlide = document.getElementById('currentSlide');
-    
-    let slideWidth = slider.clientWidth;
-    
-    // Update width on screen resize to keep snaps accurate
-    window.addEventListener('resize', () => {
-      slideWidth = slider.clientWidth;
-    });
-
-    // Update the [ 00 / 06 ] counter
-    const updateCounter = () => {
-      const index = Math.round(slider.scrollLeft / slideWidth);
-      currentSlide.textContent = index === 0 ? "00" : "0" + index;
-    };
-
-    // Listen to touch/scroll swipes
-    slider.addEventListener('scroll', () => {
-      clearTimeout(slider.scrollTimeout);
-      slider.scrollTimeout = setTimeout(updateCounter, 50);
-    });
-
-    // Arrow Button Controls
-    nextBtn.addEventListener('click', () => {
-      slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
-    });
-
-    prevBtn.addEventListener('click', () => {
-      slider.scrollBy({ left: -slideWidth, behavior: 'smooth' });
-    });
-  }
 });
