@@ -11,12 +11,21 @@
 
 <nav id="main-nav">
   <a class="nav-logo" href="#">WRM Lab</a>
-  <ul class="nav-links"></ul>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="pages/01-pyrogeography.html">01 Pyromes</a></li>
+    <li><a href="pages/02-fire-weather.html">02 Fire Weather</a></li>
+    <li><a href="pages/03-extreme-fires.html">03 Korea 2025</a></li>
+    <li><a href="pages/04-simulations.html">04 Simulations</a></li>
+    <li><a href="pages/05-risk-networks.html">05 Risk Networks</a></li>
+    <li><a href="pages/06-responsibility.html">06 Responsibility</a></li>
+  </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">&#9776;</button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-slideshow" id="heroSlideshow">
+  <div class="hero-slideshow">
     <div class="slide active" style="background-image: url('images/background1.jpg')"></div>
     <div class="slide" style="background-image: url('images/background2.jpg')"></div>
     <div class="slide" style="background-image: url('images/background3.jpg')"></div>
@@ -48,7 +57,7 @@
         <span class="meta-value">ML · Remote Sensing · Simulation</span>
       </div>
     </div>
-    <div class="animate-in delay-4" style="display:flex; gap:1rem; flex-wrap:wrap;">
+    <div class="animate-in delay-4">
       <a href="#projects" class="btn-primary">Explore Research ↓</a>
     </div>
   </div>
@@ -111,11 +120,6 @@
       <div class="card-scale">🌍 Global Scale · Machine Learning</div>
       <h2 class="card-title">Dynamic Evolution of <em>Pyrogeography</em></h2>
       <p class="card-desc">Using unsupervised ML on 23 years of satellite fire data to cluster global fire regimes into pyromes and track how they transition and intensify over time.</p>
-      <div class="card-tags">
-        <span class="tag">Clustering</span>
-        <span class="tag">Spatial Autocorrelation</span>
-        <span class="tag">Remote Sensing</span>
-      </div>
       <div class="card-arrow">Explore project →</div>
     </a>
 
@@ -124,11 +128,6 @@
       <div class="card-scale">🌡️ Global Scale · Climate</div>
       <h2 class="card-title">Dynamic Evolution of <em>Fire Weather Risk</em></h2>
       <p class="card-desc">Quantifying synchronous fire weather days (SFW) using the Fire Weather Index and assessing the conditional probability of fire occurrence under extreme weather.</p>
-      <div class="card-tags">
-        <span class="tag">Fire Weather Index</span>
-        <span class="tag">SFW Days</span>
-        <span class="tag">VPD · SPEI</span>
-      </div>
       <div class="card-arrow">Explore project →</div>
     </a>
 
@@ -137,11 +136,6 @@
       <div class="card-scale">🇰🇷 Regional Scale · Case Study</div>
       <h2 class="card-title">Are Extreme Fires <em>Unprecedented or Unexpected?</em></h2>
       <p class="card-desc">Benchmarking the March 2025 South Korea wildfire — the nation's most destructive — against global fast-fire databases and analyzing the anomalous climate conditions.</p>
-      <div class="card-tags">
-        <span class="tag">Fast Fires</span>
-        <span class="tag">Burn Severity</span>
-        <span class="tag">Climate Anomaly</span>
-      </div>
       <div class="card-arrow">Explore project →</div>
     </a>
 
@@ -150,11 +144,6 @@
       <div class="card-scale">🔥 Local Scale · Modeling</div>
       <h2 class="card-title">Fighting Fires with <em>Wildfire Simulations</em></h2>
       <p class="card-desc">Coupling Cell2Fire with WindNinja to produce spatially-explicit, downscaled wind fields. Applied to the 2025 Los Angeles Palisades Fire first 32-hour spread.</p>
-      <div class="card-tags">
-        <span class="tag">Cell2Fire</span>
-        <span class="tag">WindNinja</span>
-        <span class="tag">HRRR</span>
-      </div>
       <div class="card-arrow">Explore project →</div>
     </a>
 
@@ -163,11 +152,6 @@
       <div class="card-scale">🗺️ Operational · Decision Support</div>
       <h2 class="card-title">Fighting Fires with <em>Fire Potential Risk Networks</em></h2>
       <p class="card-desc">Automating fire potential polygon (FPP) generation via hydrology-inspired modeling and building suppression strategy networks. Deployed with Catalan Fire Service.</p>
-      <div class="card-tags">
-        <span class="tag">Cell2Fire</span>
-        <span class="tag">FPP Networks</span>
-        <span class="tag">Operational</span>
-      </div>
       <div class="card-arrow">Explore project →</div>
     </a>
 
@@ -176,11 +160,6 @@
       <div class="card-scale">🏘️ Neighborhood Scale · Community</div>
       <h2 class="card-title">Mitigating Risk as <em>Shared Responsibility</em></h2>
       <p class="card-desc">Rethinking defensible spaces as overlapping buffers and developing spatial responsibility networks that quantify shared and owed risk between neighboring parcels.</p>
-      <div class="card-tags">
-        <span class="tag">Responsibility Networks</span>
-        <span class="tag">FLAMMAP</span>
-        <span class="tag">Community Planning</span>
-      </div>
       <div class="card-arrow">Explore project →</div>
     </a>
 
@@ -197,9 +176,8 @@
   </div>
 </footer>
 
-<script src="js/main.js"></script>
-<script>buildNav('home');</script>
 <script>
+// Slideshow
 (function() {
   var slides = document.querySelectorAll('.hero-slideshow .slide');
   if (!slides.length) return;
@@ -210,6 +188,11 @@
     slides[current].classList.add('active');
   }, 5000);
 })();
+
+// Mobile hamburger
+document.getElementById('navHamburger').addEventListener('click', function() {
+  document.getElementById('main-nav').classList.toggle('nav-open');
+});
 </script>
 </body>
 </html>
