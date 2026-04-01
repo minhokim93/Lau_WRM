@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lau Future Climates Grant — Multiscale Wildfire Risk Research</title>
+  <title>Lau Just Climate Futures Grant: Multi-scale Wildfire Risk Research</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
 </head>
 <body>
 
 <nav id="main-nav">
-  <a class="nav-logo" href="#">2025/2026 Lau Future Climates Grant</a>
+  <a class="nav-logo" href="#">2025/2026 Lau Just Climate Futures Grant</a>
   <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">&#9776;</button>
   <ul class="nav-links" id="navLinks">
     <li><a href="#" class="active">Home</a></li>
@@ -23,9 +23,7 @@
   </ul>
 </nav>
 
-<!-- HERO with inline-style slideshow -->
 <section class="hero">
-  <!-- Each slide is a full-bleed div; JS cycles the 'active' class -->
   <div class="hero-slideshow" id="heroSlideshow">
     <div class="slide active" id="slide0"></div>
     <div class="slide"        id="slide1"></div>
@@ -37,7 +35,7 @@
   <div class="hero-content">
     <div class="hero-eyebrow animate-in">Lau Just Climate Futures · UC Berkeley CED · 2025–2026</div>
     <h1 class="animate-in delay-1">
-      Multiscale Mitigation of<br>
+      Multi-scale Mitigation of<br>
       <em>Wildfire Risk</em> in the<br>
       Natural &amp; Built Environments
     </h1>
@@ -48,22 +46,22 @@
   <div class="hero-meta animate-in delay-3">
       
       <div class="meta-item">
-        <span class="meta-value">Marta C. Gonzalez</span>
+        <a href="https://ced.berkeley.edu/people/marta-gonzalez" target="_blank" class="meta-value">Marta C. Gonzalez</a>
         <span class="meta-label">DCRP & CIVENG</span>
       </div>
 
       <div class="meta-item">
-        <span class="meta-value">John Radke</span>
+        <a href="https://ced.berkeley.edu/people/john-radke" target="_blank" class="meta-value">John Radke</a>
         <span class="meta-label">DCRP & LAEP</span>
       </div>
 
       <div class="meta-item">
-        <span class="meta-value">Maryam Hosseini</span>
+        <a href="https://ced.berkeley.edu/people/maryam-hosseini" target="_blank" class="meta-value">Maryam Hosseini</a>
         <span class="meta-label">DCRP</span>
       </div>
 
       <div class="meta-item">
-        <span class="meta-value">Minho Kim</span>
+        <a href="https://ced.berkeley.edu/people/minho-kim" target="_blank" class="meta-value">Minho Kim</a>
         <span class="meta-label">LAEP</span>
       </div>
 
@@ -72,7 +70,7 @@
       <a href="#projects" class="btn-primary">Explore Research ↓</a>
     </div>
 
-    <!-- Slideshow dots -->
+  
     <div class="slide-dots" id="slideDots">
       <span class="dot active" data-index="0"></span>
       <span class="dot" data-index="1"></span>
@@ -82,17 +80,144 @@
   </div>
 </section>
 
-<!-- EXHIBITION BANNER -->
-<div class="exhibit-banner">
-  <div class="exhibit-banner-inner">
-    <div class="exhibit-label">Upcoming Exhibition</div>
-    <div class="exhibit-title">The Weather To Come: Forest, City, Fire, Cloud</div>
-    <div class="exhibit-details">Apr 7 – 21, 2026 &nbsp;·&nbsp; Bauer Wurster Gallery, UC Berkeley CED &nbsp;·&nbsp; Opening Reception Apr 7 at 6 PM</div>
-    <a href="https://ced.berkeley.edu/events/just-climate-futures-exhibition" target="_blank" class="exhibit-link">View Exhibition Details →</a>
-  </div>
+<style>
+  .news-banner {
+    background: linear-gradient(90deg, rgba(255,59,48,0.08) 0%, rgba(255,149,0,0.05) 100%);
+    border-top: 1px solid rgba(255,59,48,0.3);
+    border-bottom: 1px solid rgba(255,59,48,0.15);
+    padding: 3rem 2.5rem;
+  }
+  .news-banner-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .news-section-title {
+    font-size: 1.4rem;
+    color: var(--bone);
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+  }
+  .news-section-num {
+    font-family: var(--font-mono);
+    color: var(--fire-red);
+    margin-right: 0.5rem;
+  }
+  
+  /* --- NEW SCROLL CONTAINER STYLES --- */
+  .news-scroll-container {
+    max-height: 180px;
+    overflow-y: auto;
+    padding-right: 1.5rem;
+  }
+  
+  /* Custom Scrollbar for Webkit (Chrome, Safari, Edge) */
+  .news-scroll-container::-webkit-scrollbar {
+    width: 6px;
+  }
+  .news-scroll-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+  }
+  .news-scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  .news-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 59, 48, 0.6);
+  }
+  /* ---------------------------------- */
+
+  .news-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .news-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .news-label-col {
+    flex-shrink: 0;
+    width: 120px;
+  }
+  .news-content-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .news-link {
+    font-size: 0.8rem;
+    color: var(--fire-orange);
+    font-weight: 500;
+    margin-top: 0.2rem;
+    display: inline-block;
+  }
+  .news-link:hover {
+    color: var(--fire-red);
+  }
+  @media (max-width: 768px) {
+    .news-item { flex-direction: column; gap: 0.8rem; }
+    .news-label-col { width: auto; }
+  }
+</style>
+
+<div class="news-banner">
+  <div class="news-banner-inner">
+    
+    <div class="news-section-title">
+      <span class="news-section-num">—</span> News and Updates
+    </div>
+    
+    <div class="news-scroll-container">
+      <div class="news-item">
+        <div class="news-label-col">
+          <div class="exhibit-label" style="display:inline-block; text-align:center; width:100%;">Exhibition</div>
+        </div>
+        <div class="news-content-col">
+          <div class="exhibit-title" style="font-size: 1.1rem;">The Weather To Come: Forest, City, Fire, Cloud</div>
+          <div class="exhibit-details">Apr 7 – 21, 2026 &nbsp;·&nbsp; Bauer Wurster Gallery, UC Berkeley CED &nbsp;·&nbsp; Opening Reception Apr 7 at 6 PM</div>
+          <a href="https://ced.berkeley.edu/events/just-climate-futures-exhibition" target="_blank" class="news-link">View Exhibition Details →</a>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-label-col">
+          <div class="exhibit-label" style="display:inline-block; text-align:center; width:100%;">Exhibition</div>
+        </div>
+        <div class="news-content-col">
+          <div class="exhibit-title" style="font-size: 1.1rem;">SF Climate Week 2026: The Weather To Come: Forest, City, Fire, Cloud</div>
+          <a href="https://luma.com/llenbt5h" target="_blank" class="news-link">Read more →</a>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-label-col">
+          <div class="exhibit-label" style="display:inline-block; text-align:center; width:100%;">Publication</div>
+        </div>
+        <div class="news-content-col">
+          <div class="exhibit-title" style="font-size: 1.1rem;">New Automated Mapping Approach Has Potential to Revolutionize Fire Suppression</div>
+          <a href="https://ced.berkeley.edu/news/new-automated-mapping-approach-has-potential-to-revolutionize-fire-suppression-research-from-uc-berkeley-shows" target="_blank" class="news-link">Read Article →</a>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-label-col">
+          <div class="exhibit-label" style="display:inline-block; text-align:center; width:100%;">Grant</div>
+        </div>
+        <div class="news-content-col">
+          <div class="exhibit-title" style="font-size: 1.1rem;">CED awards four faculty seed grants for climate research</div>
+          <a href="https://ced.berkeley.edu/news/ced-awards-seed-grants-for-climate-research" target="_blank" class="news-link">Read Announcement →</a>
+        </div>
+      </div>
+    </div> </div>
 </div>
 
-<!-- CONTEXT -->
 <section style="padding: 5rem 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.06);">
   <div style="max-width:1200px; margin:0 auto;">
     <div class="two-col">
@@ -103,13 +228,8 @@
         </div>
         <div class="block-text">
           <p>Wildfires represent one of the most dynamic and destructive natural hazards on Earth. Their behavior is shaped by an intricate interplay of climate, ecology, topography, and human settlement — and all of these factors are shifting simultaneously.</p>
-          <p>This research program addresses wildfire risk from a <strong style="color:var(--bone)">multiscale perspective</strong>: understanding how global fire regimes are evolving, how synchronous fire weather is expanding hazard windows, how extreme fires emerge in unexpected geographies, how simulations can improve operational response, and how risk is shared and mitigated at the community scale.</p>
+          <p>This research program addresses wildfire risk from a <strong style="color:var(--bone)">multi-scale perspective</strong>: understanding how global fire regimes are evolving, how synchronous fire weather is expanding hazard windows, how extreme fires emerge in unexpected geographies, how simulations can improve operational response, and how risk is shared and mitigated at the community scale.</p>
           <p>The six projects presented here span from global pyrogeographic analysis using machine learning down to parcel-level responsibility networks for neighborhood fire risk mitigation.</p>
-        </div>
-        <div class="team-block">
-          <div class="team-label">Research Team</div>
-          <div class="team-names">Marta Gonzalez · Maryam Hosseini · John Radke · Minho Kim</div>
-          <div class="team-affil">UC Berkeley College of Environmental Design</div>
         </div>
       </div>
       <div>
@@ -140,7 +260,6 @@
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section class="projects-section" id="projects">
   <div class="section-header">
     <span class="section-num">— </span>
@@ -152,7 +271,7 @@
       <span class="card-num">01</span>
       <div class="card-scale">🌍 Global Scale · Machine Learning</div>
       <h2 class="card-title">Dynamic Evolution of <em>Pyrogeography</em></h2>
-      <p class="card-desc">Using unsupervised ML on 23 years of satellite fire data to cluster global fire regimes into pyromes and track how they transition and intensify over time.</p>
+      <p class="card-desc">Using unsupervised ML on 24 years of global fire data to cluster into pyromes and track how they transition and intensify over time.</p>
       <div class="card-arrow">Explore project →</div>
     </a>
 
@@ -160,7 +279,7 @@
       <span class="card-num">02</span>
       <div class="card-scale">🌡️ Global Scale · Climate</div>
       <h2 class="card-title">Dynamic Evolution of <em>Fire Weather Risk</em></h2>
-      <p class="card-desc">Quantifying synchronous fire weather days (SFW) using the Fire Weather Index and assessing the conditional probability of fire occurrence under extreme weather.</p>
+      <p class="card-desc">Quantifying concurrent high-danger fire weaether conditions using synchronous fire weather days (SFW) and assessing the conditional probability of fire occurrence under extreme weather.</p>
       <div class="card-arrow">Explore project →</div>
     </a>
 
@@ -168,7 +287,7 @@
       <span class="card-num">03</span>
       <div class="card-scale">🇰🇷 Regional Scale · Case Study</div>
       <h2 class="card-title">Are Extreme Fires <em>Unprecedented or Unexpected?</em></h2>
-      <p class="card-desc">Benchmarking the March 2025 South Korea wildfire — the nation's most destructive — against global fast-fire databases and analyzing the anomalous climate conditions.</p>
+      <p class="card-desc">Benchmarking the record-breaking March 2025 South Korea wildfire against global megafire databases and analyzing the anomalous fire weather conditions.</p>
       <div class="card-arrow">Explore project →</div>
     </a>
 
@@ -176,7 +295,7 @@
       <span class="card-num">04</span>
       <div class="card-scale">🔥 Local Scale · Modeling</div>
       <h2 class="card-title">Fighting Fires with <em>Wildfire Simulations</em></h2>
-      <p class="card-desc">Coupling Cell2Fire with WindNinja to produce spatially-explicit, downscaled wind fields. Applied to the 2025 Los Angeles Palisades Fire first 32-hour spread.</p>
+      <p class="card-desc">Coupling Cell2Fire with WindNinja to produce spatially-explicit, downscaled wind fields and to simulate on the 2025 Los Angeles Palisades Fire for first 32-hour spread.</p>
       <div class="card-arrow">Explore project →</div>
     </a>
 
@@ -184,7 +303,7 @@
       <span class="card-num">05</span>
       <div class="card-scale">🗺️ Operational · Decision Support</div>
       <h2 class="card-title">Fighting Fires with <em>Fire Potential Risk Networks</em></h2>
-      <p class="card-desc">Automating fire potential polygon (FPP) generation via hydrology-inspired modeling and building suppression strategy networks. Deployed with Catalan Fire Service.</p>
+      <p class="card-desc">Automating fire potential polygon generation via hydrology-inspired modeling and building suppression strategy networks - together with the Catalan Fire Service.</p>
       <div class="card-arrow">Explore project →</div>
     </a>
 
@@ -200,9 +319,9 @@
 
 <footer>
   <div>
-    <a class="footer-logo" href="#">2025/2026 Lau Future Climates Grant</a>
-    <div style="margin-top:0.4rem;">Multiscale Mitigation of Wildfire Risk in the Natural &amp; Built Environments</div>
-    <div style="margin-top:0.25rem; font-size:0.78rem;">Gonzalez · Hosseini · Radke · Kim &nbsp;|&nbsp; UC Berkeley CED</div>
+    <a class="footer-logo" href="#">2025/2026 Lau Just Climate Futures</a>
+    <div style="margin-top:0.4rem;">Multi-scale Mitigation of Wildfire Risk in the Natural &amp; Built Environments</div>
+    <div style="margin-top:0.25rem; font-size:0.78rem;">Gonzalez · Radke · Hosseini · Kim &nbsp;|&nbsp; UC Berkeley CED</div>
   </div>
   <div style="text-align:right; font-size:0.8rem;">
     <div><a href="https://ced.berkeley.edu/events/just-climate-futures-exhibition" target="_blank" style="color:var(--fire-red);">Just Climate Futures Exhibition →</a></div>

@@ -5,8 +5,140 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>04 · Fighting Fires with Wildfire Simulations</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .toc-float {
+      position: fixed;
+      top: 50%;
+      right: 1.5rem;
+      transform: translateY(-50%);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0;
+    }
+    .toc-toggle {
+      background: rgba(20,16,12,0.92);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      color: var(--ash, #999);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.7rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .toc-toggle:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+    .toc-panel {
+      display: none;
+      background: rgba(20,16,12,0.95);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      backdrop-filter: blur(12px);
+      padding: 1rem 0;
+      min-width: 180px;
+      max-width: 220px;
+      margin-top: 0.4rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .toc-panel.open { display: block; }
+    .toc-panel-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fire-red, #e34c26);
+      padding: 0 1rem 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 0.5rem;
+    }
+    .toc-item {
+      display: block;
+      padding: 0.4rem 1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--ash, #888);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.15s, background 0.15s;
+      line-height: 1.4;
+    }
+    .toc-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .toc-item.active { color: var(--fire-orange, #f4a261); }
+    .toc-item-tag {
+      display: block;
+      font-size: 0.48rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--fire-red, #e34c26);
+      margin-bottom: 0.1rem;
+    }
+    @media (max-width: 900px) { .toc-float { display: none; } }
+
+    /* ── Iframe plot card styles ── */
+    .plot-card-iframe-wrap {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: #111;
+      border-radius: 4px 4px 0 0;
+      cursor: pointer;
+    }
+    .plot-card-iframe-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      cursor: pointer;
+    }
+    .plot-card-link-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .plot-card-link-sep {
+      color: var(--ash, #888);
+      font-size: 0.7rem;
+    }
+    .plot-card-link-expand {
+      color: var(--ash, #888);
+      font-size: 0.72rem;
+      cursor: pointer;
+    }
+    .plot-card-link-expand:hover {
+      color: var(--fire-orange, #f4a261);
+    }
+  </style>
 </head>
 <body>
+
+<!-- ── Floating TOC ── -->
+<div class="toc-float" id="tocFloat">
+  <button class="toc-toggle" id="tocToggle" aria-label="Toggle table of contents">☰ Contents</button>
+  <nav class="toc-panel" id="tocPanel" role="navigation" aria-label="Page contents">
+    <div class="toc-panel-title">04 · Simulations</div>
+    <a class="toc-item" href="#section-background">
+      <span class="toc-item-tag">Background</span>The 2025 Palisades Fire
+    </a>
+    <a class="toc-item" href="#section-method">
+      <span class="toc-item-tag">Method</span>Cell2Fire + WindNinja
+    </a>
+    <a class="toc-item" href="#section-results">
+      <span class="toc-item-tag">Results</span>Accuracy Comparison
+    </a>
+    <a class="toc-item" href="#section-conclusion">
+      <span class="toc-item-tag">Conclusion</span>Key Takeaway
+    </a>
+  </nav>
+</div>
+
 <nav id="main-nav">
   <a class="nav-logo" href="../index.html">2025/2026 Lau Future Climates Grant</a>
   <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">&#9776;</button>
@@ -32,18 +164,12 @@
       <div style="font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fire-red); margin-bottom:1rem;">🔥 Local Scale · Fire Modeling · LA 2025</div>
       <h1 class="page-title">Fighting Fires with <em>Wildfire Simulations</em></h1>
       <p class="page-subtitle">Wind plays a crucial role in fire behavior, yet most operational fire spread models assume constant wind. We couple Cell2Fire with WindNinja to produce downscaled, spatially-explicit wind fields — applied to the 2025 Palisades Fire's first 32 hours of most rapid spread.</p>
-      <!-- <div class="stats-row" style="margin-top:2rem; max-width:700px;">
-        <div class="stat-item"><span class="stat-num">32hr</span><span class="stat-label">Most Rapid Spread Window</span></div>
-        <div class="stat-item"><span class="stat-num">30m</span><span class="stat-label">Wind Field Resolution</span></div>
-        <div class="stat-item"><span class="stat-num">60mph</span><span class="stat-label">Peak Wind Speed</span></div>
-        <div class="stat-item"><span class="stat-num">C2F-M</span><span class="stat-label">Best Simulation Config</span></div>
-      </div> -->
     </div>
   </div>
 
   <div class="content-area">
 
-    <div class="content-block">
+    <div class="content-block" id="section-background">
       <div class="block-header">
         <span class="block-tag">Background</span>
         <span class="block-title">The 2025 Palisades Fire</span>
@@ -54,7 +180,7 @@
       </div>
     </div>
 
-    <div class="content-block">
+    <div class="content-block" id="section-method">
       <div class="block-header">
         <span class="block-tag">Method</span>
         <span class="block-title">Cell2Fire + WindNinja: Offline Coupling</span>
@@ -84,26 +210,26 @@
       </div>
 
       <div class="plots-grid">
-        <div class="plot-card" onclick="alert('Link your WindNinja wind field visualization here.')">
-          <div class="plot-card-preview">💨</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Downscaled Wind Fields</div>
-            <div class="plot-card-desc">Aggregated wind field visualization — average wind speed [mph] across all 32 time steps.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your wind speed time series here.')">
-          <div class="plot-card-preview">📈</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Wind Speed Over Time</div>
-            <div class="plot-card-desc">Mean wind speed [mph] across 32 hours — peaking after 10 hours, predominantly southwest.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
+        <div class="plot-card" onclick="window.open('../assets/04_windninja_wind_field_visualization.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/04_windninja_wind_field_visualization.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Downscaled Wind Fields</div>
+    <div class="plot-card-desc">Aggregated wind field visualization — average wind speed [mph] across all 32 time steps.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/04_windninja_wind_field_visualization.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/04_wind_speed_timeseries.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/04_wind_speed_timeseries.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Wind Speed Over Time</div>
+    <div class="plot-card-desc">Mean wind speed [mph] across 32 hours — peaking after 10 hours, predominantly southwest.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/04_wind_speed_timeseries.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
       </div>
     </div>
 
-    <div class="content-block">
+    <div class="content-block" id="section-results">
       <div class="block-header">
         <span class="block-tag">Results</span>
         <span class="block-title">Simulation Accuracy Comparison</span>
@@ -113,34 +239,34 @@
         <p>Overestimation may be preferred for <strong style="color:var(--bone)">risk-averse decision makers</strong>. After 25 hours, C2F-MM became more accurate due to less overestimation, suggesting a potential hybrid approach.</p>
       </div>
       <div class="plots-grid">
-        <div class="plot-card" onclick="alert('Link your simulation result maps (C2F, C2F-M, C2F-MM) here.')">
-          <div class="plot-card-preview">🔥</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Simulation Result Maps</div>
-            <div class="plot-card-desc">Elapsed time maps for C2F Only, C2F with Mass Solver, and C2F with Mass + Momentum Solver.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your burned area time series comparison here.')">
-          <div class="plot-card-preview">📊</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Burned Area Over Time</div>
-            <div class="plot-card-desc">Cumulative burned area [km²] across all three configurations vs. observed — accurate, overestimated, underestimated zones.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your difference maps (accurate/over/under-estimation) here.')">
-          <div class="plot-card-preview">🎯</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Accuracy Difference Maps</div>
-            <div class="plot-card-desc">Spatial maps of accurate, overestimated, and underestimated cells per simulation configuration.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
+        <div class="plot-card" onclick="window.open('../assets/04_simulation_result_maps.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/04_simulation_result_maps.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Simulation Result Maps</div>
+    <div class="plot-card-desc">Elapsed time maps for C2F Only, C2F with Mass Solver, and C2F with Mass + Momentum Solver.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/04_simulation_result_maps.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/04_burned_area_timeseries_comparison.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/04_burned_area_timeseries_comparison.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Burned Area Over Time</div>
+    <div class="plot-card-desc">Cumulative burned area [km²] across all three configurations vs. observed — accurate, overestimated, underestimated zones.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/04_burned_area_timeseries_comparison.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/04_accuracy_difference_maps.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/04_accuracy_difference_maps.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Accuracy Difference Maps</div>
+    <div class="plot-card-desc">Spatial maps of accurate, overestimated, and underestimated cells per simulation configuration.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/04_accuracy_difference_maps.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
       </div>
     </div>
 
-    <div class="content-block" style="border-bottom:none;">
+    <div class="content-block" id="section-conclusion" style="border-bottom:none;">
       <div class="finding-callout">
         <p>Offline coupling of Cell2Fire with WindNinja provides downscaled, spatially-explicit wind fields to improve simulations during the initial wind-driven major fire spread event (32-hour window).</p>
         <div class="finding-source">Key Conclusion · Wildfire Simulations</div>
@@ -163,16 +289,32 @@
 
 <footer>
   <div><a class="footer-logo" href="../index.html">2025/2026 Lau Future Climates Grant</a><div>Project 04 · Fighting Fires with Wildfire Simulations</div></div>
-  
 </footer>
 
 <script src="../js/main.js"></script>
-
-
 <script>
-document.getElementById('navHamburger').addEventListener('click', function() {
-  document.getElementById('navLinks').classList.toggle('open');
-});
+  document.getElementById('navHamburger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.getElementById('tocToggle').addEventListener('click', function() {
+    document.getElementById('tocPanel').classList.toggle('open');
+  });
+  document.querySelectorAll('.toc-item').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('tocPanel').classList.remove('open');
+    });
+  });
+  var sections = document.querySelectorAll('[id^="section-"]');
+  var tocItems = document.querySelectorAll('.toc-item');
+  function onScroll() {
+    var scrollY = window.scrollY + 120;
+    var current = '';
+    sections.forEach(function(s) { if (s.offsetTop <= scrollY) current = s.id; });
+    tocItems.forEach(function(item) {
+      item.classList.toggle('active', item.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll);
 </script>
 </body>
 </html>

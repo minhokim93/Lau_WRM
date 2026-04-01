@@ -5,8 +5,143 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>03 · Are Extreme Fires Unprecedented or Unexpected?</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .toc-float {
+      position: fixed;
+      top: 50%;
+      right: 1.5rem;
+      transform: translateY(-50%);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0;
+    }
+    .toc-toggle {
+      background: rgba(20,16,12,0.92);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      color: var(--ash, #999);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.7rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .toc-toggle:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+    .toc-panel {
+      display: none;
+      background: rgba(20,16,12,0.95);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      backdrop-filter: blur(12px);
+      padding: 1rem 0;
+      min-width: 180px;
+      max-width: 220px;
+      margin-top: 0.4rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .toc-panel.open { display: block; }
+    .toc-panel-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fire-red, #e34c26);
+      padding: 0 1rem 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 0.5rem;
+    }
+    .toc-item {
+      display: block;
+      padding: 0.4rem 1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--ash, #888);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.15s, background 0.15s;
+      line-height: 1.4;
+    }
+    .toc-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .toc-item.active { color: var(--fire-orange, #f4a261); }
+    .toc-item-tag {
+      display: block;
+      font-size: 0.48rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--fire-red, #e34c26);
+      margin-bottom: 0.1rem;
+    }
+    @media (max-width: 900px) { .toc-float { display: none; } }
+
+    /* ── Iframe plot card styles ── */
+    .plot-card-iframe-wrap {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: #111;
+      border-radius: 4px 4px 0 0;
+      cursor: pointer;
+    }
+    .plot-card-iframe-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      cursor: pointer;
+    }
+    .plot-card-link-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .plot-card-link-sep {
+      color: var(--ash, #888);
+      font-size: 0.7rem;
+    }
+    .plot-card-link-expand {
+      color: var(--ash, #888);
+      font-size: 0.72rem;
+      cursor: pointer;
+    }
+    .plot-card-link-expand:hover {
+      color: var(--fire-orange, #f4a261);
+    }
+  </style>
 </head>
 <body>
+
+<!-- ── Floating TOC ── -->
+<div class="toc-float" id="tocFloat">
+  <button class="toc-toggle" id="tocToggle" aria-label="Toggle table of contents">☰ Contents</button>
+  <nav class="toc-panel" id="tocPanel" role="navigation" aria-label="Page contents">
+    <div class="toc-panel-title">03 · Korea 2025</div>
+    <a class="toc-item" href="#section-background">
+      <span class="toc-item-tag">Background</span>Unexpected Geography
+    </a>
+    <a class="toc-item" href="#section-benchmarking">
+      <span class="toc-item-tag">Analysis</span>Global Benchmarking
+    </a>
+    <a class="toc-item" href="#section-progression">
+      <span class="toc-item-tag">Analysis</span>Fire Progression &amp; Severity
+    </a>
+    <a class="toc-item" href="#section-anomalies">
+      <span class="toc-item-tag">Finding</span>Meteorological Anomalies
+    </a>
+    <a class="toc-item" href="#section-conclusion">
+      <span class="toc-item-tag">Conclusion</span>Key Takeaway
+    </a>
+  </nav>
+</div>
+
 <nav id="main-nav">
   <a class="nav-logo" href="../index.html">2025/2026 Lau Future Climates Grant</a>
   <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">&#9776;</button>
@@ -32,20 +167,12 @@
       <div style="font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fire-red); margin-bottom:1rem;">🇰🇷 Regional Scale · Case Study · March 2025</div>
       <h1 class="page-title">Are Extreme Fires <em>Unprecedented or Unexpected?</em></h1>
       <p class="page-subtitle">The March 2025 wildfire in North Gyeongsang province, South Korea, was the most extreme and damaging fire in the nation's history. By benchmarking against global databases, we show that extreme fires can occur even in unexpected geographies.</p>
-      <!-- <div class="stats-row" style="margin-top:2rem; max-width:800px;">
-        <div class="stat-item"><span class="stat-num">32</span><span class="stat-label">Fatalities</span></div>
-        <div class="stat-item"><span class="stat-num">5,000+</span><span class="stat-label">Buildings Damaged</span></div>
-        <div class="stat-item"><span class="stat-num">100K ha</span><span class="stat-label">Burned in One Week</span></div>
-        <div class="stat-item"><span class="stat-num">$1.2B</span><span class="stat-label">Estimated Costs (USD)</span></div>
-        <div class="stat-item"><span class="stat-num">99th</span><span class="stat-label">Global Percentile (Spread Rate)</span></div>
-        <div class="stat-item"><span class="stat-num">3rd</span><span class="stat-label">Fastest vs. US Megafires</span></div>
-      </div> -->
     </div>
   </div>
 
   <div class="content-area">
 
-    <div class="content-block">
+    <div class="content-block" id="section-background">
       <div class="block-header">
         <span class="block-tag">Background</span>
         <span class="block-title">An Unexpected Geography of Fire</span>
@@ -60,7 +187,7 @@
       </div>
     </div>
 
-    <div class="content-block">
+    <div class="content-block" id="section-benchmarking">
       <div class="block-header">
         <span class="block-tag">Analysis</span>
         <span class="block-title">How Unprecedented? Global Benchmarking</span>
@@ -70,26 +197,26 @@
         <p>Benchmarked against the top-100 US megafires (Balch et al., 2024), the Korea fire is ranked as the <strong style="color:var(--fire-red)">3rd fastest fire</strong> — faster than the 2018 Camp Fire, 2020 North Complex, and 2020 August Complex Fires in California.</p>
       </div>
       <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="alert('Link your global fire spread scatter plot (Korea highlighted) here.')">
-          <div class="plot-card-preview">⭐</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Global Fire Spread Benchmarking</div>
-            <div class="plot-card-desc">Total fire size vs. max daily spread for 20-year global dataset with Korea 2025 highlighted at 99th percentile.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your top-100 US megafires comparison plot here.')">
-          <div class="plot-card-preview">🏆</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Top-100 US Megafires Comparison</div>
-            <div class="plot-card-desc">Korea 2025 ranked 3rd fastest among the top-100 US megafires by max daily spread rate.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
+        <div class="plot-card" onclick="window.open('../assets/03_global_fire_spread_benchmarking.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_global_fire_spread_benchmarking.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Global Fire Spread Benchmarking</div>
+    <div class="plot-card-desc">Total fire size vs. max daily spread for 20-year global dataset with Korea 2025 highlighted at 99th percentile.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_global_fire_spread_benchmarking.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/03_top100_us_megafires_comparison.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_top100_us_megafires_comparison.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Top-100 US Megafires Comparison</div>
+    <div class="plot-card-desc">Korea 2025 ranked 3rd fastest among the top-100 US megafires by max daily spread rate.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_top100_us_megafires_comparison.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
       </div>
     </div>
 
-    <div class="content-block">
+    <div class="content-block" id="section-progression">
       <div class="block-header">
         <span class="block-tag">Analysis</span>
         <span class="block-title">Fire Progression &amp; Burn Severity</span>
@@ -99,34 +226,34 @@
         <p>The fire's progression shows initial spread southward in the first 24 hours, followed by rapid expansion as wind conditions intensified. Cumulative burned area exceeded 100,000 ha within the first week.</p>
       </div>
       <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="alert('Link your fire isochrone map here.')">
-          <div class="plot-card-preview">🗺️</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Fire Progression Isochrones</div>
-            <div class="plot-card-desc">Temporal isochrones showing fire spread colored by time step from ignition.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your dNBR burn severity map here.')">
-          <div class="plot-card-preview">🔴</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Burn Severity (dNBR)</div>
-            <div class="plot-card-desc">Delta Normalized Burn Ratio from harmonized Sentinel-2/Landsat-8 pre/post imagery.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your burned area cumulative chart here.')">
-          <div class="plot-card-preview">📊</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Burned Area Over Time</div>
-            <div class="plot-card-desc">Burned area per time step and cumulative total — with dNBR distribution boxplots per interval.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
+        <div class="plot-card" onclick="window.open('../assets/03_fire_progression_isochrones.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_fire_progression_isochrones.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Fire Progression Isochrones</div>
+    <div class="plot-card-desc">Temporal isochrones showing fire spread colored by time step from ignition.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_fire_progression_isochrones.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/03_dnbr_burn_severity_map.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_dnbr_burn_severity_map.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Burn Severity (dNBR)</div>
+    <div class="plot-card-desc">Delta Normalized Burn Ratio from harmonized Sentinel-2/Landsat-8 pre/post imagery.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_dnbr_burn_severity_map.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/03_burned_area_cumulative_chart.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_burned_area_cumulative_chart.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Burned Area Over Time</div>
+    <div class="plot-card-desc">Burned area per time step and cumulative total — with dNBR distribution boxplots per interval.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_burned_area_cumulative_chart.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
       </div>
     </div>
 
-    <div class="content-block">
+    <div class="content-block" id="section-anomalies">
       <div class="block-header">
         <span class="block-tag">Finding</span>
         <span class="block-title">How Unexpected? Unusually Hot, Dry &amp; Windy</span>
@@ -136,26 +263,26 @@
         <p>Monthly and peak-day anomaly maps confirm that the fire was driven by concurrent extreme departures from historical norms across all relevant meteorological variables — a true compound extreme event.</p>
       </div>
       <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="alert('Link your climate anomaly comparison chart here.')">
-          <div class="plot-card-preview">🌡️</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Meteorological Anomalies</div>
-            <div class="plot-card-desc">Temperature, humidity, wind speed, and BLH compared across 35-year baseline, March 2025 monthly mean, and peak fire day.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your spatial anomaly maps here.')">
-          <div class="plot-card-preview">🗺️</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Spatial Anomaly Maps</div>
-            <div class="plot-card-desc">Spatial extent of meteorological anomalies for March 2025 monthly mean and March 22 peak day.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
+        <div class="plot-card" onclick="window.open('../assets/03_meteorological_anomalies_chart.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_meteorological_anomalies_chart.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Meteorological Anomalies</div>
+    <div class="plot-card-desc">Temperature, humidity, wind speed, and BLH compared across 35-year baseline, March 2025 monthly mean, and peak fire day.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_meteorological_anomalies_chart.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/03_spatial_anomaly_maps.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_spatial_anomaly_maps.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Spatial Anomaly Maps</div>
+    <div class="plot-card-desc">Spatial extent of meteorological anomalies for March 2025 monthly mean and March 22 peak day.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_spatial_anomaly_maps.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
       </div>
     </div>
 
-    <div class="content-block" style="border-bottom:none;">
+    <div class="content-block" id="section-conclusion" style="border-bottom:none;">
       <div class="finding-callout">
         <p>Extreme fires may no longer be unprecedented in South Korea, as fires occurring at unexpected times and places increase the chance of incurring catastrophic damages and costs if not well prepared for.</p>
         <div class="finding-source">Key Conclusion · Korea 2025 Case Study</div>
@@ -177,16 +304,32 @@
 
 <footer>
   <div><a class="footer-logo" href="../index.html">2025/2026 Lau Future Climates Grant</a><div>Project 03 · Extreme Fires — Korea 2025</div></div>
-  
 </footer>
 
 <script src="../js/main.js"></script>
-
-
 <script>
-document.getElementById('navHamburger').addEventListener('click', function() {
-  document.getElementById('navLinks').classList.toggle('open');
-});
+  document.getElementById('navHamburger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.getElementById('tocToggle').addEventListener('click', function() {
+    document.getElementById('tocPanel').classList.toggle('open');
+  });
+  document.querySelectorAll('.toc-item').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('tocPanel').classList.remove('open');
+    });
+  });
+  var sections = document.querySelectorAll('[id^="section-"]');
+  var tocItems = document.querySelectorAll('.toc-item');
+  function onScroll() {
+    var scrollY = window.scrollY + 120;
+    var current = '';
+    sections.forEach(function(s) { if (s.offsetTop <= scrollY) current = s.id; });
+    tocItems.forEach(function(item) {
+      item.classList.toggle('active', item.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll);
 </script>
 </body>
 </html>

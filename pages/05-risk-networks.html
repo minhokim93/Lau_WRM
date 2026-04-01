@@ -5,8 +5,140 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>05 · Fighting Fires with Fire Potential Risk Networks</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .toc-float {
+      position: fixed;
+      top: 50%;
+      right: 1.5rem;
+      transform: translateY(-50%);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0;
+    }
+    .toc-toggle {
+      background: rgba(20,16,12,0.92);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      color: var(--ash, #999);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.7rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .toc-toggle:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+    .toc-panel {
+      display: none;
+      background: rgba(20,16,12,0.95);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      backdrop-filter: blur(12px);
+      padding: 1rem 0;
+      min-width: 180px;
+      max-width: 220px;
+      margin-top: 0.4rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .toc-panel.open { display: block; }
+    .toc-panel-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fire-red, #e34c26);
+      padding: 0 1rem 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 0.5rem;
+    }
+    .toc-item {
+      display: block;
+      padding: 0.4rem 1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--ash, #888);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.15s, background 0.15s;
+      line-height: 1.4;
+    }
+    .toc-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .toc-item.active { color: var(--fire-orange, #f4a261); }
+    .toc-item-tag {
+      display: block;
+      font-size: 0.48rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--fire-red, #e34c26);
+      margin-bottom: 0.1rem;
+    }
+    @media (max-width: 900px) { .toc-float { display: none; } }
+
+    /* ── Iframe plot card styles ── */
+    .plot-card-iframe-wrap {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: #111;
+      border-radius: 4px 4px 0 0;
+      cursor: pointer;
+    }
+    .plot-card-iframe-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      cursor: pointer;
+    }
+    .plot-card-link-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .plot-card-link-sep {
+      color: var(--ash, #888);
+      font-size: 0.7rem;
+    }
+    .plot-card-link-expand {
+      color: var(--ash, #888);
+      font-size: 0.72rem;
+      cursor: pointer;
+    }
+    .plot-card-link-expand:hover {
+      color: var(--fire-orange, #f4a261);
+    }
+  </style>
 </head>
 <body>
+
+<!-- ── Floating TOC ── -->
+<div class="toc-float" id="tocFloat">
+  <button class="toc-toggle" id="tocToggle" aria-label="Toggle table of contents">☰ Contents</button>
+  <nav class="toc-panel" id="tocPanel" role="navigation" aria-label="Page contents">
+    <div class="toc-panel-title">05 · Risk Networks</div>
+    <a class="toc-item" href="#section-problem">
+      <span class="toc-item-tag">Problem</span>Manual Zones Insufficient
+    </a>
+    <a class="toc-item" href="#section-method">
+      <span class="toc-item-tag">Method</span>Hydrology-Inspired FPPs
+    </a>
+    <a class="toc-item" href="#section-results">
+      <span class="toc-item-tag">Results</span>Proactive vs. Reactive
+    </a>
+    <a class="toc-item" href="#section-conclusion">
+      <span class="toc-item-tag">Conclusion</span>Key Takeaway
+    </a>
+  </nav>
+</div>
+
 <nav id="main-nav">
   <a class="nav-logo" href="../index.html">2025/2026 Lau Future Climates Grant</a>
   <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">&#9776;</button>
@@ -32,18 +164,12 @@
       <div style="font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fire-red); margin-bottom:1rem;">🗺️ Operational · Decision Support · Catalan Fire Service</div>
       <h1 class="page-title">Fighting Fires with <em>Fire Potential Risk Networks</em></h1>
       <p class="page-subtitle">As fires grow more extreme and complex, proactive risk-informed strategies are imperative. We collaborated with the Catalan Fire Service (Spain) to automate fire potential polygon generation and deploy the model in real wildfire operations.</p>
-      <!-- <div class="stats-row" style="margin-top:2rem; max-width:700px;">
-        <div class="stat-item"><span class="stat-num">FPP</span><span class="stat-label">Fire Potential Polygons</span></div>
-        <div class="stat-item"><span class="stat-num">68 ha</span><span class="stat-label">Case Study Fire (4.5 hrs)</span></div>
-        <div class="stat-item"><span class="stat-num">Proactive</span><span class="stat-label">Best Suppression Strategy</span></div>
-        <div class="stat-item"><span class="stat-num">Spain</span><span class="stat-label">Deployed Operationally</span></div>
-      </div> -->
     </div>
   </div>
 
   <div class="content-area">
 
-    <div class="content-block">
+    <div class="content-block" id="section-problem">
       <div class="block-header">
         <span class="block-tag">Problem</span>
         <span class="block-title">Manual Risk Zones Are Insufficient</span>
@@ -54,7 +180,7 @@
       </div>
     </div>
 
-    <div class="content-block">
+    <div class="content-block" id="section-method">
       <div class="block-header">
         <span class="block-tag">Method</span>
         <span class="block-title">Hydrology-Inspired Fire Potential Polygons</span>
@@ -64,26 +190,26 @@
         <p>The process: (1) Run Cell2Fire simulation → (2) Generate elapsed time surface → (3) Compute flow direction using D8 algorithm → (4) Extract "reversed basins" as FPPs. The resulting polygons capture the natural fire spread pathways across complex terrain.</p>
       </div>
       <div class="plots-grid">
-        <div class="plot-card" onclick="alert('Link your FPP generation visualization here.')">
-          <div class="plot-card-preview">🏔️</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">FPP Generation Pipeline</div>
-            <div class="plot-card-desc">Step-by-step: elevation → fire spread time → spread direction → delineated fire potential polygons.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your case study map (Vilanova de Meià) here.')">
-          <div class="plot-card-preview">🇪🇸</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Case Study: Vilanova de Meià</div>
-            <div class="plot-card-desc">August 2024 wildfire in Spain — predominantly shrubs/grasses, 68 ha over 4.5 hours with surrounding villages.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
+        <div class="plot-card" onclick="window.open('../assets/05_fpp_generation_pipeline.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/05_fpp_generation_pipeline.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">FPP Generation Pipeline</div>
+    <div class="plot-card-desc">Step-by-step: elevation → fire spread time → spread direction → delineated fire potential polygons.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/05_fpp_generation_pipeline.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/05_case_study_vilanova_de_meia.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/05_case_study_vilanova_de_meia.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Case Study: Vilanova de Meià</div>
+    <div class="plot-card-desc">August 2024 wildfire in Spain — predominantly shrubs/grasses, 68 ha over 4.5 hours with surrounding villages.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/05_case_study_vilanova_de_meia.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
       </div>
     </div>
 
-    <div class="content-block">
+    <div class="content-block" id="section-results">
       <div class="block-header">
         <span class="block-tag">Results</span>
         <span class="block-title">Proactive vs. Reactive Suppression Strategies</span>
@@ -94,34 +220,34 @@
         <p>Proactive decision-making consistently achieved the most time gained against fire progression, enabling valuable windows for evacuation, resource deployment, and containment.</p>
       </div>
       <div class="plots-grid">
-        <div class="plot-card" onclick="alert('Link your suppression scenarios elapsed time map here.')">
-          <div class="plot-card-preview">⏱️</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Suppression Scenario Comparison</div>
-            <div class="plot-card-desc">Elapsed time maps: No Suppression, Prescribed Burn, Reactive (SR), and Proactive (SP) strategies.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your cumulative distribution of elapsed time change here.')">
-          <div class="plot-card-preview">📊</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">CDF of Time Gained</div>
-            <div class="plot-card-desc">Cumulative distribution functions of elapsed time change per tactic vs. no suppression baseline.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your dynamic FPP network visualization here.')">
-          <div class="plot-card-preview">🕸️</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Dynamic FPP Network</div>
-            <div class="plot-card-desc">Pre- and post-suppression networks showing elapsed time and time gained per polygon in descending order.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
+        <div class="plot-card" onclick="window.open('../assets/05_suppression_scenarios_elapsed_time.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/05_suppression_scenarios_elapsed_time.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Suppression Scenario Comparison</div>
+    <div class="plot-card-desc">Elapsed time maps: No Suppression, Prescribed Burn, Reactive (SR), and Proactive (SP) strategies.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/05_suppression_scenarios_elapsed_time.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/05_cdf_time_gained.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/05_cdf_time_gained.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">CDF of Time Gained</div>
+    <div class="plot-card-desc">Cumulative distribution functions of elapsed time change per tactic vs. no suppression baseline.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/05_cdf_time_gained.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/05_dynamic_fpp_network.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/05_dynamic_fpp_network.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Dynamic FPP Network</div>
+    <div class="plot-card-desc">Pre- and post-suppression networks showing elapsed time and time gained per polygon in descending order.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/05_dynamic_fpp_network.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
       </div>
     </div>
 
-    <div class="content-block" style="border-bottom:none;">
+    <div class="content-block" id="section-conclusion" style="border-bottom:none;">
       <div class="finding-callout">
         <p>Fire potential polygons and networks can revolutionize operational fire management to design proactive tactics that can significantly delay fire progression and gain valuable time for fire suppression.</p>
         <div class="finding-source">Key Conclusion · Fire Potential Risk Networks</div>
@@ -143,16 +269,32 @@
 
 <footer>
   <div><a class="footer-logo" href="../index.html">2025/2026 Lau Future Climates Grant</a><div>Project 05 · Fire Potential Risk Networks</div></div>
-  
 </footer>
 
 <script src="../js/main.js"></script>
-
-
 <script>
-document.getElementById('navHamburger').addEventListener('click', function() {
-  document.getElementById('navLinks').classList.toggle('open');
-});
+  document.getElementById('navHamburger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.getElementById('tocToggle').addEventListener('click', function() {
+    document.getElementById('tocPanel').classList.toggle('open');
+  });
+  document.querySelectorAll('.toc-item').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('tocPanel').classList.remove('open');
+    });
+  });
+  var sections = document.querySelectorAll('[id^="section-"]');
+  var tocItems = document.querySelectorAll('.toc-item');
+  function onScroll() {
+    var scrollY = window.scrollY + 120;
+    var current = '';
+    sections.forEach(function(s) { if (s.offsetTop <= scrollY) current = s.id; });
+    tocItems.forEach(function(item) {
+      item.classList.toggle('active', item.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll);
 </script>
 </body>
 </html>

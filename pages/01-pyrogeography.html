@@ -6,8 +6,146 @@
   <title>01 · Dynamic Evolution of Pyrogeography</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+  <style>
+    /* ── Floating TOC ── */
+    .toc-float {
+      position: fixed;
+      top: 50%;
+      right: 1.5rem;
+      transform: translateY(-50%);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;ㄹ
+      align-items: flex-end;
+      gap: 0;
+    }
+    .toc-toggle {
+      background: rgba(20,16,12,0.92);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      color: var(--ash, #999);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.7rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .toc-toggle:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+    .toc-panel {
+      display: none;
+      background: rgba(20,16,12,0.95);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      backdrop-filter: blur(12px);
+      padding: 1rem 0;
+      min-width: 180px;
+      max-width: 220px;
+      margin-top: 0.4rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .toc-panel.open { display: block; }
+    .toc-panel-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fire-red, #e34c26);
+      padding: 0 1rem 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 0.5rem;
+    }
+    .toc-item {
+      display: block;
+      padding: 0.4rem 1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--ash, #888);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.15s, background 0.15s;
+      line-height: 1.4;
+    }
+    .toc-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .toc-item.active { color: var(--fire-orange, #f4a261); }
+    .toc-item-tag {
+      display: block;
+      font-size: 0.48rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--fire-red, #e34c26);
+      margin-bottom: 0.1rem;
+    }
+    @media (max-width: 900px) { .toc-float { display: none; } }
+
+    /* ── Iframe plot card styles ── */
+    .plot-card-iframe-wrap {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: #111;
+      border-radius: 4px 4px 0 0;
+      cursor: pointer;
+    }
+    .plot-card-iframe-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      cursor: pointer;
+    }
+    .plot-card-link-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .plot-card-link-sep {
+      color: var(--ash, #888);
+      font-size: 0.7rem;
+    }
+    .plot-card-link-expand {
+      color: var(--ash, #888);
+      font-size: 0.72rem;
+      cursor: pointer;
+    }
+    .plot-card-link-expand:hover {
+      color: var(--fire-orange, #f4a261);
+    }
+  </style>
 </head>
 <body>
+
+<!-- ── Floating TOC ── -->
+<div class="toc-float" id="tocFloat">
+  <button class="toc-toggle" id="tocToggle" aria-label="Toggle table of contents">☰ Contents</button>
+  <nav class="toc-panel" id="tocPanel" role="navigation" aria-label="Page contents">
+    <div class="toc-panel-title">01 · Pyrogeography</div>
+    <a class="toc-item" href="#section-background">
+      <span class="toc-item-tag">Background</span>What is a Pyrome?
+    </a>
+    <a class="toc-item" href="#section-method">
+      <span class="toc-item-tag">Method</span>Clustering via ML
+    </a>
+    <a class="toc-item" href="#section-stability">
+      <span class="toc-item-tag">Finding</span>Stability &amp; Transitions
+    </a>
+    <a class="toc-item" href="#section-hotspots">
+      <span class="toc-item-tag">Finding</span>Hotspots &amp; Coldspots
+    </a>
+    <a class="toc-item" href="#section-conclusion">
+      <span class="toc-item-tag">Conclusion</span>Key Takeaway
+    </a>
+    <a class="toc-item" href="#section-poster">
+      <span class="toc-item-tag">Resource</span>Research Poster
+    </a>
+  </nav>
+</div>
 
 <nav id="main-nav">
   <a class="nav-logo" href="../index.html">2025/2026 Lau Future Climates Grant</a>
@@ -25,7 +163,6 @@
 
 <div class="page-wrap">
 
-  <!-- ─── PAGE HERO ─── -->
   <div class="page-hero">
     <div class="page-hero-bg"></div>
     <div class="page-num-large">01</div>
@@ -42,32 +179,12 @@
       </div>
       <h1 class="page-title">Dynamic Evolution of <em>Pyrogeography</em></h1>
       <p class="page-subtitle">Fire regimes are changing but our understanding of pyrogeography tends to be static. We study the dynamic evolution of pyromes over time to see how they cluster and transition — revealing intensifying trends across 17.2% of global grid cells.</p>
-
-      <!-- <div class="stats-row" style="margin-top:2rem; max-width:700px;">
-        <div class="stat-item">
-          <span class="stat-num">5</span>
-          <span class="stat-label">Pyrome Classes</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">23yr</span>
-          <span class="stat-label">Fire Atlas Data</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">17.2%</span>
-          <span class="stat-label">Cells Intensifying</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">+10%</span>
-          <span class="stat-label">Rise in 20 Years</span>
-        </div>
-      </div> -->
     </div>
   </div>
 
   <div class="content-area">
 
-    <!-- ─── OVERVIEW ─── -->
-    <div class="content-block">
+    <div class="content-block" id="section-background">
       <div class="block-header">
         <span class="block-tag">Background</span>
         <span class="block-title">What is a Pyrome?</span>
@@ -108,29 +225,7 @@
       </div>
     </div>
 
-    <!-- ─── POSTER ─── -->
-    <div class="content-block">
-      <div class="block-header">
-        <span class="block-tag">Research Poster</span>
-        <span class="block-title">Full Poster</span>
-      </div>
-      <div class="poster-viewer">
-        <div class="poster-viewer-header">
-          <span class="poster-viewer-label">Dynamic Evolution of Pyrogeography</span>
-          <span style="font-family:'IBM Plex Mono',monospace; font-size:0.6rem; color:var(--ash);">Scroll to zoom · Click to expand</span>
-        </div>
-        <div style="background:#111; display:flex; align-items:center; justify-content:center; min-height:300px; padding:2rem;">
-          <div style="text-align:center; color:var(--ash);">
-            <div style="font-size:3rem; margin-bottom:1rem;">🗺️</div>
-            <div style="font-family:'Syne',sans-serif; font-weight:600; font-size:1rem; color:var(--bone); margin-bottom:0.5rem;">Poster coming soon</div>
-            <div style="font-size:0.8rem;">Upload poster images to <code style="background:rgba(255,255,255,0.08);padding:0.1em 0.4em;border-radius:2px;">assets/poster-01.jpg</code></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ─── PYROMES CLUSTERING ─── -->
-    <div class="content-block">
+    <div class="content-block" id="section-method">
       <div class="block-header">
         <span class="block-tag">Method</span>
         <span class="block-title">Clustering Pyromes via ML</span>
@@ -141,35 +236,34 @@
       </div>
 
       <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="alert('Link your interactive pyrome map here. Replace this with your Plotly/Leaflet embed URL.')">
-          <div class="plot-card-preview">🗺️</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Global Pyrome Map (2021–2025)</div>
-            <div class="plot-card-desc">Interactive map of modern pyrome classifications at 1-degree resolution.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your temporal pyrome evolution animation here.')">
-          <div class="plot-card-preview">📊</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Temporal Pyrome Evolution</div>
-            <div class="plot-card-desc">Animated comparison of pyrome classes across all six temporal intervals.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your pyrome characteristic radar charts here.')">
-          <div class="plot-card-preview">📡</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Pyrome Characteristics</div>
-            <div class="plot-card-desc">Radar charts showing fire size, frequency, duration, expansion, and perimeter per pyrome.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
+        <div class="plot-card" onclick="window.open('../assets/01_pyrome_map_2021_2025.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_pyrome_map_2021_2025.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Global Pyrome Map (2021–2025)</div>
+    <div class="plot-card-desc">Interactive map of modern pyrome classifications at 1-degree resolution.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_pyrome_map_2021_2025.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/01_pyrome_evolution_animated.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_pyrome_evolution_animated.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Temporal Pyrome Evolution</div>
+    <div class="plot-card-desc">Animated comparison of pyrome classes across all six temporal intervals.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_pyrome_evolution_animated.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/01_pyrome_characteristics_radar.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_pyrome_characteristics_radar.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Pyrome Characteristics</div>
+    <div class="plot-card-desc">Radar charts showing fire size, frequency, duration, expansion, and perimeter per pyrome.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_pyrome_characteristics_radar.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
       </div>
     </div>
 
-    <!-- ─── DYNAMIC PYROMES ─── -->
-    <div class="content-block">
+    <div class="content-block" id="section-stability">
       <div class="block-header">
         <span class="block-tag">Finding</span>
         <span class="block-title">Pyrome Stability &amp; Transitions</span>
@@ -180,27 +274,26 @@
       </div>
 
       <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="alert('Link your pyrome stability map here.')">
-          <div class="plot-card-preview">🔄</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Pyrome Stability Map</div>
-            <div class="plot-card-desc">Global map showing transition frequency — red (low stability) to green (high stability).</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your Sankey transition diagram here.')">
-          <div class="plot-card-preview">🔀</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Transition Sankey Diagram</div>
-            <div class="plot-card-desc">Flow diagram showing pyrome class transitions across all temporal intervals.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
+        <div class="plot-card" onclick="window.open('../assets/01_sankey_full_transitions.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_sankey_full_transitions.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Transition Sankey Diagram</div>
+    <div class="plot-card-desc">Interactive flow diagram showing pyrome class transitions across all temporal intervals.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_sankey_full_transitions.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/01_pyrome_stability_map.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_pyrome_stability_map.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Pyrome Stability Map</div>
+    <div class="plot-card-desc">Spatial map of transition counts per grid cell — highlighting low-stability regions.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_pyrome_stability_map.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
       </div>
     </div>
 
-    <!-- ─── SPATIAL AUTOCORRELATION ─── -->
-    <div class="content-block">
+    <div class="content-block" id="section-hotspots">
       <div class="block-header">
         <span class="block-tag">Finding</span>
         <span class="block-title">Hotspots &amp; Coldspots of Change</span>
@@ -216,27 +309,26 @@
       </div>
 
       <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="alert('Link your LISA hotspot/coldspot map here.')">
-          <div class="plot-card-preview">🔥</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">Global Hotspot / Coldspot Map</div>
-            <div class="plot-card-desc">LISA spatial autocorrelation — intensifying (red) vs. recovering (blue) regions.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
-        <div class="plot-card" onclick="alert('Link your HH/LL ratio time series here.')">
-          <div class="plot-card-preview">📈</div>
-          <div class="plot-card-body">
-            <div class="plot-card-title">HH/LL Ratio Over Time</div>
-            <div class="plot-card-desc">Time series of intensification vs. recovery grid cell percentages across intervals.</div>
-            <div class="plot-card-link">Open interactive plot →</div>
-          </div>
-        </div>
+        <div class="plot-card" onclick="window.open('../assets/01_lisa_hotspot_coldspot_map.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_lisa_hotspot_coldspot_map.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">Global Hotspot / Coldspot Map</div>
+    <div class="plot-card-desc">LISA spatial autocorrelation — intensifying (red) vs. recovering (blue) regions.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_lisa_hotspot_coldspot_map.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
+        <div class="plot-card" onclick="window.open('../assets/01_hh_ll_ratio_timeseries.html', '_blank')">
+  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_hh_ll_ratio_timeseries.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+  <div class="plot-card-body">
+    <div class="plot-card-title">HH/LL Ratio Over Time</div>
+    <div class="plot-card-desc">Time series of intensification vs. recovery grid cell percentages across intervals.</div>
+    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_hh_ll_ratio_timeseries.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+  </div>
+</div>
       </div>
     </div>
 
-    <!-- ─── CONCLUSION ─── -->
-    <div class="content-block" style="border-bottom:none;">
+    <div class="content-block" id="section-conclusion" style="border-bottom:none;">
       <div class="finding-callout">
         <p>Changing pyromes and continued intensification into higher activity/intensity pyromes signal that the new reality must acknowledge and prepare for fire seasons and geography shifting at a global scale.</p>
         <div class="finding-source">Key Conclusion · Dynamic Pyrogeography</div>
@@ -250,30 +342,73 @@
       </div>
     </div>
 
-  </div><!-- /content-area -->
+    <div class="content-block" id="section-poster">
+      <div class="block-header">
+        <span class="block-tag">Research Poster</span>
+        <span class="block-title">Full Poster</span>
+      </div>
+      <div class="poster-viewer">
+        <div class="poster-viewer-header">
+          <span class="poster-viewer-label">01. Dynamic Evolution of Pyrogeography</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:0.6rem; color:var(--ash);">Click to view full resolution</span>
+        </div>
+        <div style="background:#111; overflow:hidden; border-radius: 0 0 4px 4px;">
+          <a href="../images/01_poster.jpg" target="_blank">
+            <img src="../images/01_poster.jpg" alt="Research Poster" style="width:100%; display:block; height:auto; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
   <div class="page-nav">
     <a href="../index.html" class="page-nav-btn">← Home</a>
     <a href="02-fire-weather.html" class="page-nav-btn">02 · Fire Weather Risk →</a>
   </div>
 
-</div><!-- /page-wrap -->
+</div>
 
 <footer>
   <div>
     <a class="footer-logo" href="../index.html">2025/2026 Lau Future Climates Grant</a>
     <div>Project 01 · Dynamic Evolution of Pyrogeography</div>
   </div>
-  
 </footer>
 
 <script src="../js/main.js"></script>
-
-
 <script>
-document.getElementById('navHamburger').addEventListener('click', function() {
-  document.getElementById('navLinks').classList.toggle('open');
-});
+  // Nav hamburger
+  document.getElementById('navHamburger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // TOC toggle
+  document.getElementById('tocToggle').addEventListener('click', function() {
+    document.getElementById('tocPanel').classList.toggle('open');
+  });
+
+  // Close TOC when clicking a link
+  document.querySelectorAll('.toc-item').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('tocPanel').classList.remove('open');
+    });
+  });
+
+  // Highlight active TOC item on scroll
+  var sections = document.querySelectorAll('[id^="section-"]');
+  var tocItems = document.querySelectorAll('.toc-item');
+  function onScroll() {
+    var scrollY = window.scrollY + 120;
+    var current = '';
+    sections.forEach(function(s) {
+      if (s.offsetTop <= scrollY) current = s.id;
+    });
+    tocItems.forEach(function(item) {
+      item.classList.toggle('active', item.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll);
 </script>
 </body>
 </html>
