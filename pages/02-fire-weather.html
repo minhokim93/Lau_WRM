@@ -168,6 +168,7 @@
       <div style="font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fire-red); margin-bottom:1rem;">🌡️ Global Scale · Climate Analysis</div>
       <h1 class="page-title">Dynamic Evolution of <em>Fire Weather Risk</em></h1>
       <p class="page-subtitle">Wildfire risk is changing spatiotemporally on a global scale due to growing fire weather risk. Days when weather conditions exceed a high-danger threshold are quantified as "Synchronous Fire Weather" (SFW) days — and these are increasing globally.</p>
+      <p>Full paper coming soon!</p>    
     </div>
   </div>
 
@@ -208,11 +209,11 @@
     <div class="content-block" id="section-omega">
       <div class="block-header">
         <span class="block-tag">Finding</span>
-        <span class="block-title">Expected Fire Weather Risk (Ω)</span>
+        <span class="block-title">Expected Fire Weather Risk</span>
       </div>
       <div class="block-text">
-        <p>A new metric called <strong style="color:var(--bone)">Expected Fire Weather Risk (Ω)</strong> is computed as the conditional probability that fire occurs given SFW conditions. The global mean Ω = 0.086, meaning roughly 8.6% of SFW days see an actual fire occurrence at a given location.</p>
-        <p>This metric is compared with high-resolution global population data (WorldPop) at four-year intervals to assess the progression of human exposure. Countries with high risk × high population density — such as South Sudan, Mozambique, and Central African Republic in Africa, and Cambodia and Myanmar in Asia — face disproportionate exposure.</p>
+        <p>A new metric called <strong style="color:var(--bone)">Conditional Fire Weather Risk</strong> is computed as the conditional probability (i.e., P(Fire|SFW)) that fire occurs given SFW conditions (under specific FWI percentiles). For instance, the global mean is 0.086, meaning roughly 8.6% of SFW days (under FWI90) see an actual fire occurrence at a given location.</p>
+        <p>This metric is compared with high-resolution global population data (WorldPop) at four-year intervals to assess human exposure to this risk. Countries with high risk and high population density may face disproportionate exposure.</p>
       </div>
       <div class="plots-grid" style="margin-top:1.5rem;">
         <div class="plot-card" onclick="window.open('../assets/02_omega_by_country_population.html', '_blank')">
