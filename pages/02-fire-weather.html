@@ -199,70 +199,11 @@
         <p>For each grid cell, the historical FWI distribution is derived from a 40-year baseline. Each daily FWI value is compared against the baseline threshold (e.g., FWI90). Days exceeding the threshold are counted as SFW days, and averaged per year.</p>
         <p>A <strong style="color:var(--bone)">synchronicity ratio</strong> is further computed based on SFW per month per pyrome, using a "sync threshold" that determines the proportion of minimum SFW grid cells that must be active simultaneously for the event to be considered synchronous.</p>
       </div>
-      <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="window.open('../assets/02_global_fwi_distribution_map.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/02_global_fwi_distribution_map.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Global FWI Distribution Map</div>
-    <div class="plot-card-desc">Spatial distribution of average annual Fire Weather Index across the globe.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/02_global_fwi_distribution_map.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-        <div class="plot-card" onclick="window.open('../assets/02_sfw_days_per_pyrome.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/02_sfw_days_per_pyrome.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">SFW Days per Pyrome</div>
-    <div class="plot-card-desc">Average annual SFW days by pyrome class, across sync thresholds (20–50%).</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/02_sfw_days_per_pyrome.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-        <div class="plot-card" onclick="window.open('../assets/02_synchronicity_heatmap.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/02_synchronicity_heatmap.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Monthly Synchronicity Heatmap</div>
-    <div class="plot-card-desc">Synchronicity ratio per month per pyrome — revealing seasonal fire weather windows.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/02_synchronicity_heatmap.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-      </div>
-    </div>
+        <p>SFW can be computed with respect to severe, extreme, and catastrophic thresholds of FWI (FWI90, FWI95, FWI99). The percentile values are determined per grid cell using a 30-year climatology (1991-2020) at 0.25-degree resolution (baseline FWI). Since we measure at each grid cell, we map SFW days globally (e.g., Global map of SFW days for FWI99)</p>
+      <img src="../assets/sfw_concept.png" alt="SFW concept" style="width: 100%; height: auto; display: block; border: none;">
 
-    <div class="content-block" id="section-warming">
-      <div class="block-header">
-        <span class="block-tag">Finding</span>
-        <span class="block-title">Warming &amp; Drying Trends Promote Fire Risk</span>
       </div>
-      <div class="block-text">
-        <p>Global annual average measurements show the escalation of fire weather risk accelerating from 2020 onwards. Vapor Pressure Deficit (VPD) demonstrates a statistically significant rising trend (+0.0013 kPa/yr), while the Standardized Precipitation-Evapotranspiration Index (SPEI) shows a sharp drying trend (slope: −0.0010/yr).</p>
-        <p>These combined trends — hotter and drier — create <strong style="color:var(--fire-red)">progressively more dangerous conditions</strong> for ignition and fire spread on an annual basis.</p>
-      </div>
-      <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="window.open('../assets/02_vpd_trend_2002_2025.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/02_vpd_trend_2002_2025.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">VPD Trend (2002–2025)</div>
-    <div class="plot-card-desc">Global average Vapor Pressure Deficit with 12-month moving average and trend line.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/02_vpd_trend_2002_2025.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-        <div class="plot-card" onclick="window.open('../assets/02_spei_drying_trend_2002_2025.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/02_spei_drying_trend_2002_2025.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">SPEI Drying Trend (2002–2025)</div>
-    <div class="plot-card-desc">Standardized Precipitation-Evapotranspiration Index showing accelerating drying.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/02_spei_drying_trend_2002_2025.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-        <div class="plot-card" onclick="window.open('../assets/02_fwi_escalation_2002_2025.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/02_fwi_escalation_2002_2025.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">FWI Escalation (2002–2025)</div>
-    <div class="plot-card-desc">Annual average Fire Weather Index — with sharp escalation post-2020.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/02_fwi_escalation_2002_2025.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-      </div>
-    </div>
+    
 
     <div class="content-block" id="section-omega">
       <div class="block-header">

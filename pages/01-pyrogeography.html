@@ -15,7 +15,7 @@
       transform: translateY(-50%);
       z-index: 200;
       display: flex;
-      flex-direction: column;ㄹ
+      flex-direction: column;
       align-items: flex-end;
       gap: 0;
     }
@@ -98,6 +98,17 @@
       z-index: 2;
       cursor: pointer;
     }
+    
+    /* ── NEW: Interactive Embedded Iframe Styles ── */
+    .plot-card-embed-wrap {
+      position: relative;
+      width: 100%;
+      height: 600px; /* Expanded height for interactivity */
+      overflow: hidden;
+      background: #111;
+      border-radius: 4px 4px 0 0;
+    }
+
     .plot-card-link-row {
       display: flex;
       align-items: center;
@@ -121,7 +132,6 @@
 </head>
 <body>
 
-<!-- ── Floating TOC ── -->
 <div class="toc-float" id="tocFloat">
   <button class="toc-toggle" id="tocToggle" aria-label="Toggle table of contents">☰ Contents</button>
   <nav class="toc-panel" id="tocPanel" role="navigation" aria-label="Page contents">
@@ -178,7 +188,7 @@
         🌍 Global Scale · Machine Learning · 2002–2025
       </div>
       <h1 class="page-title">Dynamic Evolution of <em>Pyrogeography</em></h1>
-      <p class="page-subtitle">Fire regimes are changing but our understanding of pyrogeography tends to be static. We study the dynamic evolution of pyromes over time to see how they cluster and transition — revealing intensifying trends across 17.2% of global grid cells.</p>
+      <p class="page-subtitle">Fire regimes are changing but our understanding of pyrogeography tends to be static. We study the dynamic evolution of pyromes over time to see how they cluster and transition.</p>
     </div>
   </div>
 
@@ -191,9 +201,10 @@
       </div>
       <div class="two-col">
         <div class="block-text">
-          <p>A <strong style="color:var(--bone)">pyrome</strong> is a fire regime — a cluster of landscape cells that share similar wildfire characteristics. Unlike static maps, pyromes should be understood as dynamic: they shift as climate, land use, and fuel loads change.</p>
-          <p>This project uses <strong style="color:var(--bone)">unsupervised machine learning</strong> on the Global Fire Atlas (2002–2025) to cluster five distinct pyrome classes at 1-degree spatial resolution for every four-year interval. The five key variables driving clustering are: fire frequency, size, expansion rate, duration, and perimeter.</p>
-          <p>Data is sourced from the Global Fire Atlas at 0.25-degree resolution derived from satellite imagery (Andela et al., 2019).</p>
+          <p>A <strong style="color:var(--bone)">"pyrome"</strong> is a distinct cluster of landscape cells that share similar fire activity characteristics (Archibald et al., 2013).</p>
+          <p>This project uses <strong style="color:var(--bone)">unsupervised machine learning</strong> on the Global Fire Atlas (2002–2025) to cluster five distinct pyrome classes at 1-degree spatial resolution for every four-year interval. 
+          The five key variables driving clustering are: fire frequency, size, expansion rate, duration, and perimeter (Andela et al., 2019). We generate the global pyrome maps at 1-degree resolution similar to previous studies (Pais et al., 2023)</p>
+          <!-- <p>Data is sourced from the Global Fire Atlas at 0.25-degree resolution derived from satellite imagery .</p> -->
         </div>
         <div>
           <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:4px; padding:1.5rem;">
@@ -231,35 +242,25 @@
         <span class="block-title">Clustering Pyromes via ML</span>
       </div>
       <div class="block-text">
-        <p>Five regimes are clustered to 1-degree spatial resolution using <strong style="color:var(--bone)">unsupervised learning (k-means)</strong> for every four-year interval from 2002 to 2025. Each pyrome possesses distinct characteristics related to wildfire activity across the five key dimensions.</p>
-        <p>There are six sets of pyromes (one per interval). When compared over time, we observe how pyromes evolve in space and time — then study how they transition from one class to another between intervals.</p>
+        <p>We use <strong style="color:var(--bone)">unsupervised learning (k-means)</strong> on input data prepared for every four-year interval (between 2002 to 2025) and cluster the data into five clusters (i.e., pyromes). Each pyrome possesses distinct characteristics across the five input variables.
+        Ultimately, there are six sets of pyromes (one per four-year interval). When compared over time, we observe how pyromes evolve in space and time and then study how they transition from one class to another between intervals.</p>
       </div>
 
       <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="window.open('../assets/01_pyrome_map_2021_2025.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_pyrome_map_2021_2025.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Global Pyrome Map (2021–2025)</div>
-    <div class="plot-card-desc">Interactive map of modern pyrome classifications at 1-degree resolution.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_pyrome_map_2021_2025.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-        <div class="plot-card" onclick="window.open('../assets/01_pyrome_evolution_animated.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_pyrome_evolution_animated.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Temporal Pyrome Evolution</div>
-    <div class="plot-card-desc">Animated comparison of pyrome classes across all six temporal intervals.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_pyrome_evolution_animated.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-        <div class="plot-card" onclick="window.open('../assets/01_pyrome_characteristics_radar.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_pyrome_characteristics_radar.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Pyrome Characteristics</div>
-    <div class="plot-card-desc">Radar charts showing fire size, frequency, duration, expansion, and perimeter per pyrome.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_pyrome_characteristics_radar.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
+        
+        <div class="plot-card">
+          <div class="plot-card-embed-wrap">
+            <iframe src="../assets/pyrome_viewer.html" loading="lazy" style="width:100%;height:100%;border:none;"></iframe>
+          </div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Global Pyrome Map (2021–2025)</div>
+            <div class="plot-card-desc">Interactive map of modern pyrome classifications at 1-degree resolution.</div>
+            <div class="plot-card-link-row">
+              <a class="plot-card-link" href="../assets/pyrome_viewer.html" target="_blank">Open in new tab ↗</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -270,75 +271,58 @@
       </div>
       <div class="block-text">
         <p>Most pyromes tend to remain stable. Transitions occur most frequently between Non-Active, Low, and Moderate (P0, P1, P2). Some transitions occur in Moderate/Severe (P3), while fewer occur in High Activity (P4).</p>
-        <p>Pyrome stability is measured by counting all transitions occurring between 2002 and 2025. More transitions correspond to <strong style="color:var(--fire-red)">low stability</strong>; fewer transitions correspond to <strong style="color:#4CAF50">high stability</strong>.</p>
       </div>
 
-      <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="window.open('../assets/01_sankey_full_transitions.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_sankey_full_transitions.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Transition Sankey Diagram</div>
-    <div class="plot-card-desc">Interactive flow diagram showing pyrome class transitions across all temporal intervals.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_sankey_full_transitions.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-        <div class="plot-card" onclick="window.open('../assets/01_pyrome_stability_map.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_pyrome_stability_map.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Pyrome Stability Map</div>
-    <div class="plot-card-desc">Spatial map of transition counts per grid cell — highlighting low-stability regions.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_pyrome_stability_map.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-      </div>
-    </div>
 
-    <div class="content-block" id="section-hotspots">
-      <div class="block-header">
-        <span class="block-tag">Finding</span>
-        <span class="block-title">Hotspots &amp; Coldspots of Change</span>
-      </div>
-      <div class="block-text">
-        <p>Pyrome classes are weighted numerically (P0=0 to P4=4). Transitions compute the difference in assigned values (e.g., P0→P4 yields +4). <strong style="color:var(--bone)">Local Indicators of Spatial Association (LISA)</strong> identify clusters of intensifying and recovering regions.</p>
-        <p>Hotspots indicate regions where pyromes are consistently transitioning to higher activity classes over time. Coldspots represent regions recovering toward lower activity classes.</p>
+      <div class="plot-card">
+        <div class="plot-card-embed-wrap">
+          <iframe src="../assets/sankey_full_transitions.html" loading="lazy" style="width:100%;height:80%;border:none;"></iframe>
+        </div>
+        <div class="plot-card-body">
+          <div class="plot-card-title">Transition Sankey Diagram (2021–2025)</div>
+          <div class="plot-card-desc">Interactive flow diagram showing pyrome class transitions across all temporal intervals.</div>
+          
+          <div class="plot-card-link-row">
+            <a class="plot-card-link" href="../assets/sankey_full_transitions.html" target="_blank">Open in new tab ↗</a>
+          </div>
+        </div>
       </div>
 
+      
+      
+      <p>Transitions between pyrome classes from one interval to the next may also cluster and show spatiotemporal patterns. P
+      To measure this, each pyrome classes is weighted numerically (P0=0 to P4=4). Then, to measure the weight of each transition, we compute the difference in assigned values (e.g., P0 to P4 yields +4). 
+      We use <strong style="color:var(--bone)">Local Indicators of Spatial Association (LISA)</strong> (Anselin, 1995) to measure spatial autocorrelation, which identifies clusters of intensifying (hotspots) and recovering (coldspots) regions.
+      Hotspots indicate regions where pyromes are consistently transitioning to higher activity classes over time. Coldspots represent regions recovering toward lower activity classes.</p>
+      </p>
+      <img src="../assets/transitions_map.png" alt="Transitions Map" style="width: 100%; height: auto; display: block; border: none;">
+      
+      <p>
       <div class="finding-callout">
         <p>More regions (17.2% of grid cells) are transitioning into more intensifying pyromes in recent years — a near 10% increase in the past two decades. Hotspots exist globally, mainly in South Africa, Australia, North America, South America, and Eastern Europe-Asia.</p>
         <div class="finding-source">Key Finding · Spatial Autocorrelation Analysis</div>
       </div>
+      </p>
+    
+  
+      <p>
+        <img src="../assets/transitions_plot.png" alt="Transitions Plot" style="width: 100%; height: auto; display: block; border: none;">
+      </p>
+      
 
-      <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="window.open('../assets/01_lisa_hotspot_coldspot_map.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_lisa_hotspot_coldspot_map.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Global Hotspot / Coldspot Map</div>
-    <div class="plot-card-desc">LISA spatial autocorrelation — intensifying (red) vs. recovering (blue) regions.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_lisa_hotspot_coldspot_map.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-        <div class="plot-card" onclick="window.open('../assets/01_hh_ll_ratio_timeseries.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/01_hh_ll_ratio_timeseries.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">HH/LL Ratio Over Time</div>
-    <div class="plot-card-desc">Time series of intensification vs. recovery grid cell percentages across intervals.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/01_hh_ll_ratio_timeseries.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-      </div>
-    </div>
 
     <div class="content-block" id="section-conclusion" style="border-bottom:none;">
       <div class="finding-callout">
         <p>Changing pyromes and continued intensification into higher activity/intensity pyromes signal that the new reality must acknowledge and prepare for fire seasons and geography shifting at a global scale.</p>
-        <div class="finding-source">Key Conclusion · Dynamic Pyrogeography</div>
+        <div class="finding-source">Key Conclusion</div>
       </div>
 
       <div class="block-text" style="margin-top:1.5rem;">
         <p><strong style="color:var(--bone)">References:</strong></p>
-        <p style="font-size:0.8rem;">Andela et al. (2019). The Global Fire Atlas of individual fire size, duration, speed and direction. ESSD, 11(2), 529–552.</p>
+        <p style="font-size:0.8rem;">Andela et al. (2019). The Global Fire Atlas of individual fire size, duration, speed and direction. Earth System Science Data, 11(2), 529-552.</p>
         <p style="font-size:0.8rem;">Anselin (1995). Local indicators of spatial association—LISA. Geographical Analysis, 27(2), 93–115.</p>
-        <p style="font-size:0.8rem;">Archibald et al. (2013). Defining pyromes and global syndromes of fire regimes. PNAS, 110(16), 6442–6447.</p>
+        <p style="font-size:0.8rem;">Archibald, S. et al. (2013). Defining pyromes and global syndromes of fire regimes. Proceedings of the National Academy of Sciences, 110(16), 6442-6447.</p>
+        <p style="font-size:0.8rem;">Pais, C. et al. (2023). Global scale coupling of pyromes and fire regimes. Communications Earth & Environment, 4(1), 267.</p>
       </div>
     </div>
 

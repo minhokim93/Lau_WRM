@@ -175,8 +175,10 @@
         <span class="block-title">Manual Risk Zones Are Insufficient</span>
       </div>
       <div class="block-text">
-        <p>Current risk management approaches rely on <strong style="color:var(--fire-red)">manual drawing of risk management zones</strong> and expert judgment on fire behavior. Fire potential polygons (FPPs) are drawn by analysts on the landscape for risk management and planning — a process that is tedious, requires high expertise, and introduces drawing bias.</p>
-        <p>We collaborated with the Catalan Fire Service to <strong style="color:var(--bone)">automate and streamline the risk management process</strong> by coupling fire spread simulation with hydrology-inspired polygon extraction. The model was then deployed in real wildfire operations to empower fire suppression tactics and decision-making.</p>
+        <p>Current risk management approaches rely on <strong style="color:var(--fire-red)">manual drawing of risk management zones</strong> and expert judgment on fire behavior. Fire potential polygons (FPPs) are drawn by analysts on the landscape for risk management and planning — a process that is tedious, requires high expertise, and introduces drawing bias.
+        We collaborated with the Catalan Fire Service to <strong style="color:var(--bone)">automate and streamline the risk management process</strong> by coupling fire spread simulation with hydrology-inspired polygon extraction. The model was then deployed in real wildfire operations to empower fire suppression tactics and decision-making.</p>
+        <img src="../assets/manual_fpp.png" alt="Current manual process" style="width: 100%; height: auto; display: block; border: none;">
+
       </div>
     </div>
 
@@ -189,7 +191,10 @@
         <p>The key insight: <strong style="color:var(--bone)">fire spread behaves analogously to water flow</strong>. Just as water flows from high elevation to low elevation (forming basins), fire spreads from points of early ignition time to points of later arrival. By treating fire spread time as an inverted elevation surface, hydrological basin algorithms can automatically delineate Fire Potential Polygons (FPPs).</p>
         <p>The process: (1) Run Cell2Fire simulation → (2) Generate elapsed time surface → (3) Compute flow direction using D8 algorithm → (4) Extract "reversed basins" as FPPs. The resulting polygons capture the natural fire spread pathways across complex terrain.</p>
       </div>
-      <div class="plots-grid">
+
+      <img src="../assets/basin_concept.png" alt="FPP concept" style="width: 100%; height: auto; display: block; border: none;">
+      <img src="../assets/fpp_logic.png" alt="Fire potential polygon process" style="width: 100%; height: auto; display: block; border: none;">
+      <!-- <div class="plots-grid">
         <div class="plot-card" onclick="window.open('../assets/05_fpp_generation_pipeline.html', '_blank')">
   <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/05_fpp_generation_pipeline.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
   <div class="plot-card-body">
@@ -206,7 +211,7 @@
     <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/05_case_study_vilanova_de_meia.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
   </div>
 </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="content-block" id="section-results">
@@ -219,7 +224,25 @@
         <p>The <strong style="color:var(--bone)">reactive strategy (SR)</strong> suppressed the fire's right flank to slow eastward spread. The <strong style="color:var(--fire-red)">proactive strategy</strong> used fire potential polygon networks to (1) suppress the left flank to slow westward spread (tactics S1–S4) and (2) block potential new fire paths from emerging.</p>
         <p>Proactive decision-making consistently achieved the most time gained against fire progression, enabling valuable windows for evacuation, resource deployment, and containment.</p>
       </div>
-      <div class="plots-grid">
+
+      <p>
+      We compare elapsed time from the simulation without any interventions (t0), only prescribed burn (trx), and all tactics (prescribed burn and tactics S1 to S4). 
+      We also display cumulative distribution functions of the change in elapsed time for each tactic (trx and tp) against no suppression. 
+      We then measure the change in elapsed time following prescribed burn (trx- t0), all reactive tactics (tr -t0), and all proactive tactics (tp- t0). 
+      This shows that the proactive tactics are the only meaningfully effective set of tactics. The prescribed burn is useful, but only when combined with proactive suppression tactics. 
+      </p>
+      <img src="../assets/fpp_results1.png" alt="FPP result" style="width: 100%; height: auto; display: block; border: none;">
+
+      <p>
+      We then connect the polygons into networks. The pre-suppression network (“No Suppression”), post-suppression networks (“Reactive” and “Proactive” scenarios) are presented by elapsed time. 
+      The change in elapsed time plotted in descending order of polygons with the most time gained show most time gained with the top polygons highlighted in green. 
+      Similarly, we observe that the proactive tactics significantly reduces the rate of spread across polygons (network edges) and gains time (nodes), thus underscoring the importance of using proactive, risk-informed information.
+      </p>
+      <img src="../assets/fpp_results2.png" alt="FPP networks" style="width: 100%; height: auto; display: block; border: none;">
+    
+
+
+      <!-- <div class="plots-grid">
         <div class="plot-card" onclick="window.open('../assets/05_suppression_scenarios_elapsed_time.html', '_blank')">
   <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/05_suppression_scenarios_elapsed_time.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
   <div class="plot-card-body">
@@ -244,7 +267,7 @@
     <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/05_dynamic_fpp_network.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
   </div>
 </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="content-block" id="section-conclusion" style="border-bottom:none;">

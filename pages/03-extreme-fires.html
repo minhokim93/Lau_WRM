@@ -80,6 +80,14 @@
     @media (max-width: 900px) { .toc-float { display: none; } }
 
     /* ── Iframe plot card styles ── */
+    .plot-card-embed-wrap {
+      position: relative;
+      width: 100%;
+      height: 700px; /* Expanded height for interactivity */
+      overflow: hidden;
+      background: #111;
+      border-radius: 4px 4px 0 0;
+    }
     .plot-card-iframe-wrap {
       position: relative;
       width: 100%;
@@ -168,7 +176,7 @@
       <h1 class="page-title">Are Extreme Fires <em>Unprecedented or Unexpected?</em></h1>
       <p class="page-subtitle">The March 2025 wildfire in North Gyeongsang province, South Korea, was the most extreme and damaging fire in the nation's history. By benchmarking against global databases, we show that extreme fires can occur even in unexpected geographies.</p>
     </div>
-  </div>
+  <!-- </div> -->
 
   <div class="content-area">
 
@@ -178,8 +186,18 @@
         <span class="block-title">An Unexpected Geography of Fire</span>
       </div>
       <div class="block-text">
-        <p>South Korea is globally recognized for K-Pop, K-Drama, and K-Movies — not catastrophic wildfires. Yet the country has experienced continuous seasons of record-breaking fires: 2019, 2022, and 2025. The March 2025 wildfire in Uiseong-Andong county (North Gyeongsang province) became the most extreme and damaging in the nation's history.</p>
-        <p>The fire occurred <strong style="color:var(--fire-red)">months before the anticipated fire season</strong>. It spread into the wildland urban interface, driven by Foehn winds and extreme fire behavior, culminating in 32 fatalities, over 5,000 buildings damaged, and more than 100,000 ha of burned area in a single week. Thousand-year-old temples and national heritage sites were among the losses.</p>
+        <p>South Korea is globally recognized for K-Pop, K-Drama, and K-Movies — not catastrophic wildfires. 
+        Yet the country has experienced continuous seasons of record-breaking fires: 2019, 2022, and 2025. 
+        The March 2025 wildfire in Uiseong-Andong county (North Gyeongsang province southeast of South Korea) was especially devestating, occuring months before the anticipated fire season. 
+        The fire became the most extreme and damaging in the nation's history.
+        </p>
+        
+        <p>The fire occurred <strong style="color:var(--fire-red)">months before the anticipated fire season</strong>.
+        The fires spread into the wildland urban interface, driven by Foehn winds and extreme fire behavior. 
+        Although this region experienced wildfires in the past, this event exhibited unprecedented fire behavior highlighted by unprecedented fire spread on March 25 driven by pyroconvection and high winds. 
+        The impact was especially devastating as the fires led to 32 fatalities, over 5,000 buildings damaged, and more than 100,000 ha of burned area in a week.
+        Many houses, farms, facilities, ecosystems, thousand-year-old temples, and national heritage sites were damaged, incurring an estimated 1.2 billion US dollars in required costs. 
+        </p>
       </div>
       <div class="finding-callout">
         <p>"This wildfire has exposed the reality of a climate crisis unlike anything we've experienced before."</p>
@@ -194,62 +212,68 @@
       </div>
       <div class="block-text">
         <p>Maximum daily fire spread (km²/day) is increasingly used to characterize "fast fires" — highly linked with more destructive outcomes. When compared to a 20-year global fire dataset (Mahood et al., 2022), the Korea fire ranks in the <strong style="color:var(--fire-red)">99th percentile of the fastest-growing fires globally</strong>, underscoring how extreme yet unusual an event it was for this geography.</p>
-        <p>Benchmarked against the top-100 US megafires (Balch et al., 2024), the Korea fire is ranked as the <strong style="color:var(--fire-red)">3rd fastest fire</strong> — faster than the 2018 Camp Fire, 2020 North Complex, and 2020 August Complex Fires in California.</p>
       </div>
-      <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="window.open('../assets/03_global_fire_spread_benchmarking.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_global_fire_spread_benchmarking.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Global Fire Spread Benchmarking</div>
-    <div class="plot-card-desc">Total fire size vs. max daily spread for 20-year global dataset with Korea 2025 highlighted at 99th percentile.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_global_fire_spread_benchmarking.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
+
+      <img src="../assets/korea_global_plot.png" alt="Global benchmark " style="width: 100%; height: auto; display: block; border: none;">
+      
+      <p>Benchmarked against the top-100 US megafires (Balch et al., 2024), the Korea fire is ranked as the <strong style="color:var(--fire-red)">3rd fastest fire</strong> — faster than the 2018 Camp Fire, 2020 North Complex, and 2020 August Complex Fires in California.</p>
+      <!-- <div class="plots-grid" style="margin-top:1.5rem;">
         <div class="plot-card" onclick="window.open('../assets/03_top100_us_megafires_comparison.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_top100_us_megafires_comparison.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Top-100 US Megafires Comparison</div>
-    <div class="plot-card-desc">Korea 2025 ranked 3rd fastest among the top-100 US megafires by max daily spread rate.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_top100_us_megafires_comparison.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
+        <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/megafires_comparison.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
+        <div class="plot-card-body">
+          <div class="plot-card-title">Top-100 US Megafires Comparison</div>
+          <div class="plot-card-desc">Korea 2025 ranked 3rd fastest among the top-100 US megafires by max daily spread rate.</div>
+          <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/megafires_comparison.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
+        </div>
+      </div>
+  </div> -->
+        <div class="plots-grid" style="margin-top:1.5rem;">
+        
+        <div class="plot-card">
+          <div class="plot-card-embed-wrap">
+            <iframe src="../assets/megafires_comparison.html" loading="lazy" style="width:100%;height:100%;border:none;"></iframe>
+          </div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Top-100 US Megafires Comparison</div>
+            <div class="plot-card-desc">Korea 2025 ranked 3rd fastest among the top-100 US megafires by max daily spread rate.</div>
+            <div class="plot-card-link-row">
+              <a class="plot-card-link" href="../assets/megafires_comparison.html" target="_blank">Open in new tab ↗</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
+</div>
 
-    <div class="content-block" id="section-progression">
+      <div class="content-block" id="section-progression">
       <div class="block-header">
         <span class="block-tag">Analysis</span>
         <span class="block-title">Fire Progression &amp; Burn Severity</span>
       </div>
       <div class="block-text">
         <p>Fire progression was analyzed via temporal isochrones derived from satellite imagery. Burn severity was mapped using delta Normalized Burn Ratio (dNBR) from harmonized Sentinel-2/Landsat-8 imagery. Pre-fire imagery was compared with post-fire imagery acquired on April 1 and 8, 2025.</p>
-        <p>The fire's progression shows initial spread southward in the first 24 hours, followed by rapid expansion as wind conditions intensified. Cumulative burned area exceeded 100,000 ha within the first week.</p>
+        <p>The fire's progression shows initial spread southward in the first 24 hours, followed by rapid expansion as wind conditions intensified.</p>
       </div>
-      <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="window.open('../assets/03_fire_progression_isochrones.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_fire_progression_isochrones.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Fire Progression Isochrones</div>
-    <div class="plot-card-desc">Temporal isochrones showing fire spread colored by time step from ignition.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_fire_progression_isochrones.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-        <div class="plot-card" onclick="window.open('../assets/03_dnbr_burn_severity_map.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_dnbr_burn_severity_map.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Burn Severity (dNBR)</div>
-    <div class="plot-card-desc">Delta Normalized Burn Ratio from harmonized Sentinel-2/Landsat-8 pre/post imagery.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_dnbr_burn_severity_map.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-        <div class="plot-card" onclick="window.open('../assets/03_burned_area_cumulative_chart.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_burned_area_cumulative_chart.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Burned Area Over Time</div>
-    <div class="plot-card-desc">Burned area per time step and cumulative total — with dNBR distribution boxplots per interval.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_burned_area_cumulative_chart.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
+      
+      <img src="../assets/korea_burn_stats.png" alt="Korea fire's burn statistics" style="width: 100%; height: auto; display: block; border: none;">
+
+      <!-- </div> -->
+        <div class="plots-grid" style="margin-top:1.5rem;">
+        
+        <div class="plot-card">
+          <div class="plot-card-embed-wrap">
+            <iframe src="../assets/korea_fire_isochrones_interactive.html" loading="lazy" style="width:150%;height:100%;border:none;"></iframe>
+          </div>
+          <div class="plot-card-body">
+            <div class="plot-card-title">Fire progression isochrones</div>
+            <div class="plot-card-desc">Korea 2025 progression shown on Google Maps basemap.</div>
+            <div class="plot-card-link-row">
+              <a class="plot-card-link" href="../assets/korea_fire_isochrones_interactive.html" target="_blank">Open in new tab ↗</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -261,24 +285,7 @@
       <div class="block-text">
         <p>Fire weather conditions were compared against a <strong style="color:var(--bone)">35-year climatology (1990–2024)</strong>. Temperature anomaly reached +9.2°C above the March baseline, relative humidity was −12.9% below normal, wind speed was +1.7 m/s above average, and boundary layer height (BLH) was +179.4 m above baseline — all simultaneously on the peak fire day (March 22).</p>
         <p>Monthly and peak-day anomaly maps confirm that the fire was driven by concurrent extreme departures from historical norms across all relevant meteorological variables — a true compound extreme event.</p>
-      </div>
-      <div class="plots-grid" style="margin-top:1.5rem;">
-        <div class="plot-card" onclick="window.open('../assets/03_meteorological_anomalies_chart.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_meteorological_anomalies_chart.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Meteorological Anomalies</div>
-    <div class="plot-card-desc">Temperature, humidity, wind speed, and BLH compared across 35-year baseline, March 2025 monthly mean, and peak fire day.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_meteorological_anomalies_chart.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
-        <div class="plot-card" onclick="window.open('../assets/03_spatial_anomaly_maps.html', '_blank')">
-  <div class="plot-card-preview plot-card-iframe-wrap"><iframe src="../assets/03_spatial_anomaly_maps.html" loading="lazy" scrolling="no" style="width:100%;height:100%;border:none;pointer-events:none;" tabindex="-1"></iframe></div>
-  <div class="plot-card-body">
-    <div class="plot-card-title">Spatial Anomaly Maps</div>
-    <div class="plot-card-desc">Spatial extent of meteorological anomalies for March 2025 monthly mean and March 22 peak day.</div>
-    <div class="plot-card-link-row"><a class="plot-card-link" href="../assets/03_spatial_anomaly_maps.html" target="_blank" onclick="event.stopPropagation()">Open in new tab ↗</a><span class="plot-card-link-sep">·</span><span class="plot-card-link plot-card-link-expand">View below ↓</span></div>
-  </div>
-</div>
+      <img src="../assets/korea_weather.png" alt="Korea weather" style="width: 100%; height: auto; display: block; border: none;">
       </div>
     </div>
 

@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wildfire Responsibility Network</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #141720;
+    --surface2: #1c2030;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.15);
+    --text: #e8eaf0;
+    --text-muted: #7a8098;
+    --text-dim: #4a5068;
+    --accent: #ff6b4a;
+    --accent2: #4a9eff;
+    --accent3: #ffd166;
+    --col-lo: #1a3a5c;
+    --col-mid: #c07830;
+    --col-hi: #d63030;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header */
+  header {
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+  }
+
+  .header-left {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .site-title {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .site-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .header-stats {
+    display: flex;
+    gap: 20px;
+  }
+
+  .stat {
+    text-align: right;
+  }
+
+  .stat-val {
+    font-family: var(--mono);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* Main layout */
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  /* Controls bar */
+  .controls {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .ctrl-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-right: 1px solid var(--border);
+  }
+
+  .ctrl-group:last-child { border-right: none; margin-left: auto; }
+
+  .ctrl-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  select {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text);
+    background: var(--surface2);
+    border: 1px solid var(--border-hover);
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 22px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237a8098'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 7px center;
+    transition: border-color 0.15s;
+  }
+
+  select:hover { border-color: rgba(255,255,255,0.25); }
+  select:focus { border-color: var(--accent); }
+
+  option { background: #1c2030; }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Canvas panels */
+  .panels {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .divider {
+    background: var(--border);
+    width: 1px;
+  }
+
+  .panel {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .panel-tag {
+    position: absolute;
+    top: 12px; left: 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    pointer-events: none;
+    z-index: 2;
+    background: rgba(13,15,20,0.7);
+    padding: 3px 7px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+  }
+
+  /* Tooltip */
+  .tooltip {
+    position: absolute;
+    pointer-events: none;
+    display: none;
+    background: var(--surface2);
+    border: 1px solid var(--border-hover);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text);
+    z-index: 10;
+    min-width: 140px;
+    line-height: 1.8;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+
+  .tooltip b {
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+
+  .tip-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .tip-key { color: var(--text-muted); }
+  .tip-val { color: var(--text); }
+
+  /* Info bar */
+  .info-bar {
+    padding: 8px 18px;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .info-bar span { color: var(--text-muted); }
+
+  .highlight-indicator {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hl-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: none;
+  }
+
+  .hl-dot.active { display: block; }
+
+  /* Colorbar strip */
+  .colorbar-wrap {
+    padding: 8px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+
+  .colorbar-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .colorbar-strip {
+    flex: 1;
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(to right, #1a3a5c, #c07830, #d63030);
+    max-width: 280px;
+  }
+
+  .colorbar-ticks {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    max-width: 280px;
+    width: 100%;
+    margin-top: 2px;
+  }
+
+  .colorbar-group { display: flex; flex-direction: column; gap: 2px; flex:1; max-width: 280px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <span class="site-title">WFR-Net</span>
+    <span class="site-subtitle">Wildfire Responsibility Network</span>
+  </div>
+  <div class="header-stats">
+    <div class="stat">
+      <div class="stat-val" id="stat-nodes">18</div>
+      <div class="stat-label">Nodes</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="stat-edges">–</div>
+      <div class="stat-label">Edges</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="stat-hl">–</div>
+      <div class="stat-label">Selected</div>
+    </div>
+  </div>
+</header>
+
+<div class="main">
+  <div class="controls">
+    <div class="ctrl-group">
+      <span class="ctrl-label">Color by</span>
+      <select id="color-mode">
+        <option value="TR">Total Responsibility (TR)</option>
+        <option value="PR">Personal Responsibility (PR)</option>
+        <option value="SR">Shared Responsibility (SR)</option>
+        <option value="OR">Owed Responsibility (OR)</option>
+      </select>
+    </div>
+    <div class="ctrl-group">
+      <span class="ctrl-label">Edge width</span>
+      <select id="edge-mode">
+        <option value="SR">SR weighted</option>
+        <option value="uniform">Uniform</option>
+      </select>
+    </div>
+    <div class="ctrl-group">
+      <span class="ctrl-label">Highlight</span>
+      <select id="highlight-sel">
+        <option value="-1">None</option>
+      </select>
+    </div>
+    <div class="ctrl-group legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#1a3a5c"></span>Low</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#c07830"></span>Mid</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#d63030"></span>High</span>
+    </div>
+  </div>
+
+  <div class="panels">
+    <div class="panel" id="geo-panel">
+      <div class="panel-tag">Geographic · DS30 Zones</div>
+      <canvas id="geo-canvas"></canvas>
+      <div class="tooltip" id="geo-tip"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="panel" id="circ-panel">
+      <div class="panel-tag">Circular · Chord Structure</div>
+      <canvas id="circ-canvas"></canvas>
+      <div class="tooltip" id="circ-tip"></div>
+    </div>
+  </div>
+
+  <div class="colorbar-wrap">
+    <span class="colorbar-label" id="cbar-label">TR value</span>
+    <div class="colorbar-group">
+      <div class="colorbar-strip"></div>
+      <div class="colorbar-ticks">
+        <span id="cbar-min">0.00</span>
+        <span id="cbar-mid">0.50</span>
+        <span id="cbar-max">1.00</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-bar">
+    <span>Click node to highlight connections · Hover for values · Both views sync</span>
+    <div class="highlight-indicator">
+      <div class="hl-dot" id="hl-dot"></div>
+      <span id="hl-label">No selection</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── Deterministic RNG ───────────────────────────────────────────
+function mkRng(s) {
+  let x = s;
+  return () => { x ^= x << 13; x ^= x >> 17; x ^= x << 5; return (x >>> 0) / 4294967296; };
+}
+const rng = mkRng(42);
+
+// ─── Synthetic Data (replace nodes/edges arrays with real data) ──
+const N = 18;
+const nodes = [];
+
+// Two geographic clusters (lat/lon-like coordinates in [0,1])
+const clusters = [
+  { cx: 0.26, cy: 0.32, r: 0.18, count: 8 },
+  { cx: 0.66, cy: 0.64, r: 0.20, count: 10 },
+];
+
+let ni = 0;
+for (const cl of clusters) {
+  for (let i = 0; i < cl.count; i++, ni++) {
+    const a = rng() * Math.PI * 2;
+    const d = Math.sqrt(rng()) * cl.r;
+    nodes.push({
+      id: ni,
+      x: cl.cx + Math.cos(a) * d,
+      y: cl.cy + Math.sin(a) * d,
+      TR: 0.28 + rng() * 0.68,
+      PR: 0.08 + rng() * 0.52,
+      SR: rng() * 0.42,
+      OR: rng() * 0.32,
+    });
+  }
+}
+
+// Edges from spatial proximity
+const edges = [];
+const edgeSet = new Set();
+for (let i = 0; i < N; i++) {
+  for (let j = i + 1; j < N; j++) {
+    const dx = nodes[i].x - nodes[j].x;
+    const dy = nodes[i].y - nodes[j].y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 0.26 && rng() < 0.62) {
+      const key = `${i}-${j}`;
+      if (!edgeSet.has(key)) {
+        edgeSet.add(key);
+        edges.push({ from: i, to: j, SR: 0.04 + rng() * 0.48 });
+      }
+    }
+  }
+}
+
+document.getElementById('stat-edges').textContent = edges.length;
+
+// ─── Populate highlight dropdown ─────────────────────────────────
+const hsel = document.getElementById('highlight-sel');
+nodes.forEach(n => {
+  const o = document.createElement('option');
+  o.value = n.id;
+  o.textContent = `Node ${n.id}`;
+  hsel.appendChild(o);
+});
+
+let highlightNode = -1;
+let colorMode = 'TR';
+let edgeMode = 'SR';
+
+document.getElementById('color-mode').addEventListener('change', e => { colorMode = e.target.value; updateColorbar(); draw(); });
+document.getElementById('edge-mode').addEventListener('change', e => { edgeMode = e.target.value; draw(); });
+document.getElementById('highlight-sel').addEventListener('change', e => {
+  highlightNode = parseInt(e.target.value);
+  updateHlInfo();
+  draw();
+});
+
+// ─── Color mapping ────────────────────────────────────────────────
+function lerpColor(t, c1, c2) {
+  return [
+    c1[0] + (c2[0] - c1[0]) * t,
+    c1[1] + (c2[1] - c1[1]) * t,
+    c1[2] + (c2[2] - c1[2]) * t,
+  ];
+}
+
+function valueColor(t) {
+  // lo → mid → hi with gamma
+  const tg = Math.pow(Math.max(0, Math.min(1, t)), 0.75);
+  const lo = [26, 58, 92], mid = [192, 120, 48], hi = [214, 48, 48];
+  const [r, g, b] = tg < 0.5 ? lerpColor(tg * 2, lo, mid) : lerpColor((tg - 0.5) * 2, mid, hi);
+  return `rgb(${Math.round(r)},${Math.round(g)},${Math.round(b)})`;
+}
+
+function getNodeVal(n) { return n[colorMode] || 0; }
+
+function allNodeVals() { return nodes.map(n => getNodeVal(n)); }
+
+function normalizedVal(n) {
+  const vals = allNodeVals();
+  const mn = Math.min(...vals), mx = Math.max(...vals);
+  return (getNodeVal(n) - mn) / (mx - mn || 1);
+}
+
+function getEdgeVal(e) { return edgeMode === 'SR' ? e.SR : 0.5; }
+
+// ─── Colorbar update ──────────────────────────────────────────────
+function updateColorbar() {
+  const vals = allNodeVals();
+  const mn = Math.min(...vals), mx = Math.max(...vals);
+  const mid = (mn + mx) / 2;
+  document.getElementById('cbar-label').textContent = colorMode + ' value';
+  document.getElementById('cbar-min').textContent = mn.toFixed(2);
+  document.getElementById('cbar-mid').textContent = mid.toFixed(2);
+  document.getElementById('cbar-max').textContent = mx.toFixed(2);
+}
+updateColorbar();
+
+// ─── Highlight info ───────────────────────────────────────────────
+function updateHlInfo() {
+  const dot = document.getElementById('hl-dot');
+  const lbl = document.getElementById('hl-label');
+  const statHl = document.getElementById('stat-hl');
+  if (highlightNode < 0) {
+    dot.classList.remove('active');
+    lbl.textContent = 'No selection';
+    statHl.textContent = '–';
+  } else {
+    dot.classList.add('active');
+    lbl.textContent = `Node ${highlightNode} selected`;
+    statHl.textContent = highlightNode;
+  }
+}
+
+// ─── GEO CANVAS ──────────────────────────────────────────────────
+const geoCanvas = document.getElementById('geo-canvas');
+const geoCtx = geoCanvas.getContext('2d');
+const geoTip = document.getElementById('geo-tip');
+
+function resizeCanvas(canvas) {
+  const parent = canvas.parentElement;
+  const rect = parent.getBoundingClientRect();
+  if (canvas.width !== Math.floor(rect.width * devicePixelRatio) ||
+      canvas.height !== Math.floor(rect.height * devicePixelRatio)) {
+    canvas.width = Math.floor(rect.width * devicePixelRatio);
+    canvas.height = Math.floor(rect.height * devicePixelRatio);
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+  }
+}
+
+function drawGeo() {
+  resizeCanvas(geoCanvas);
+  const dpr = devicePixelRatio;
+  const W = geoCanvas.width, H = geoCanvas.height;
+  const ctx = geoCtx;
+  ctx.clearRect(0, 0, W, H);
+  ctx.save();
+
+  const pad = 56 * dpr;
+  const sw = W - pad * 2, sh = H - pad * 2;
+
+  function nx(n) { return pad + n.x * sw; }
+  function ny(n) { return pad + n.y * sh; }
+
+  // Subtle grid
+  ctx.strokeStyle = 'rgba(255,255,255,0.025)';
+  ctx.lineWidth = 0.5 * dpr;
+  for (let i = 0; i <= 5; i++) {
+    const x = pad + (i / 5) * sw;
+    const y = pad + (i / 5) * sh;
+    ctx.beginPath(); ctx.moveTo(x, pad); ctx.lineTo(x, pad + sh); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(pad + sw, y); ctx.stroke();
+  }
+
+  // DS30 zone halos
+  nodes.forEach(n => {
+    const x = nx(n), y = ny(n);
+    const r = 22 * dpr;
+    const nv = normalizedVal(n);
+    const col = valueColor(nv);
+    const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+    grad.addColorStop(0, col.replace('rgb', 'rgba').replace(')', ',0.18)'));
+    grad.addColorStop(1, col.replace('rgb', 'rgba').replace(')', ',0)'));
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+  });
+
+  // Tax parcel hexagons
+  nodes.forEach(n => {
+    const x = nx(n), y = ny(n), r = 15 * dpr;
+    ctx.beginPath();
+    for (let k = 0; k < 6; k++) {
+      const a = k / 6 * Math.PI * 2 - Math.PI / 6;
+      k === 0 ? ctx.moveTo(x + r * Math.cos(a), y + r * Math.sin(a))
+              : ctx.lineTo(x + r * Math.cos(a), y + r * Math.sin(a));
+    }
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(255,255,255,0.03)';
+    ctx.strokeStyle = 'rgba(255,255,255,0.10)';
+    ctx.lineWidth = 0.5 * dpr;
+    ctx.fill(); ctx.stroke();
+  });
+
+  // Edges
+  const maxSR = Math.max(...edges.map(e => e.SR));
+  edges.forEach(e => {
+    const a = nodes[e.from], b = nodes[e.to];
+    const isHl = highlightNode !== -1 && (e.from === highlightNode || e.to === highlightNode);
+    const val = getEdgeVal(e) / maxSR;
+    const alpha = isHl ? 0.92 : (highlightNode !== -1 ? 0.06 : 0.32);
+
+    const ax = nx(a), ay = ny(a), bx = nx(b), by = ny(b);
+    const mx2 = (ax + bx) / 2, my2 = (ay + by) / 2;
+    const cx2 = mx2 + (my2 - ay) * 0.22, cy2 = my2 - (mx2 - ax) * 0.22;
+
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = isHl ? '#ff6b4a' : valueColor(val);
+    ctx.lineWidth = isHl ? 2 * dpr : (0.6 + val * 2.2) * dpr;
+    ctx.beginPath();
+    ctx.moveTo(ax, ay);
+    ctx.quadraticCurveTo(cx2, cy2, bx, by);
+    ctx.stroke();
+
+    // Arrowhead
+    const t2 = 0.78;
+    const ex = (1 - t2) * (1 - t2) * ax + 2 * (1 - t2) * t2 * cx2 + t2 * t2 * bx;
+    const ey = (1 - t2) * (1 - t2) * ay + 2 * (1 - t2) * t2 * cy2 + t2 * t2 * by;
+    const dtx = 2 * (1 - t2) * (cx2 - ax) + 2 * t2 * (bx - cx2);
+    const dty = 2 * (1 - t2) * (cy2 - ay) + 2 * t2 * (by - cy2);
+    const ang = Math.atan2(dty, dtx);
+    const as = 6 * dpr;
+    ctx.beginPath();
+    ctx.moveTo(ex + as * Math.cos(ang - 2.4), ey + as * Math.sin(ang - 2.4));
+    ctx.lineTo(ex, ey);
+    ctx.lineTo(ex + as * Math.cos(ang + 2.4), ey + as * Math.sin(ang + 2.4));
+    ctx.stroke();
+    ctx.restore();
+  });
+
+  // Nodes
+  nodes.forEach(n => {
+    const x = nx(n), y = ny(n);
+    const isHl = n.id === highlightNode;
+    const nv = normalizedVal(n);
+    const col = valueColor(nv);
+    const nr = isHl ? 9 * dpr : 6.5 * dpr;
+
+    // Outer ring for highlight
+    if (isHl) {
+      ctx.beginPath();
+      ctx.arc(x, y, nr + 4 * dpr, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,107,74,0.18)';
+      ctx.fill();
+    }
+
+    ctx.beginPath();
+    ctx.arc(x, y, nr, 0, Math.PI * 2);
+    ctx.fillStyle = col;
+    ctx.fill();
+    ctx.strokeStyle = isHl ? '#ff6b4a' : 'rgba(255,255,255,0.3)';
+    ctx.lineWidth = isHl ? 2 * dpr : 0.75 * dpr;
+    ctx.stroke();
+
+    ctx.fillStyle = '#fff';
+    ctx.font = `${isHl ? 500 : 400} ${9 * dpr}px DM Mono,monospace`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(n.id, x, y + 0.5 * dpr);
+  });
+
+  ctx.restore();
+}
+
+// Geo tooltip & interaction
+function geoNodeAt(mx, my) {
+  const pad = 56 * devicePixelRatio;
+  const W = geoCanvas.width, H = geoCanvas.height;
+  const sw = W - pad * 2, sh = H - pad * 2;
+  let found = null, minD = 16 * devicePixelRatio;
+  nodes.forEach(n => {
+    const x = pad + n.x * sw, y = pad + n.y * sh;
+    const d = Math.hypot(mx * devicePixelRatio - x, my * devicePixelRatio - y);
+    if (d < minD) { minD = d; found = n; }
+  });
+  return found;
+}
+
+geoCanvas.addEventListener('mousemove', e => {
+  const rect = geoCanvas.getBoundingClientRect();
+  const found = geoNodeAt(e.clientX - rect.left, e.clientY - rect.top);
+  if (found) {
+    geoTip.style.display = 'block';
+    geoTip.style.left = (e.clientX - rect.left + 14) + 'px';
+    geoTip.style.top = (e.clientY - rect.top - 10) + 'px';
+    geoTip.innerHTML = tooltipHTML(found);
+  } else {
+    geoTip.style.display = 'none';
+  }
+});
+geoCanvas.addEventListener('mouseleave', () => geoTip.style.display = 'none');
+geoCanvas.addEventListener('click', e => {
+  const rect = geoCanvas.getBoundingClientRect();
+  const found = geoNodeAt(e.clientX - rect.left, e.clientY - rect.top);
+  if (found) {
+    highlightNode = highlightNode === found.id ? -1 : found.id;
+    hsel.value = highlightNode;
+    updateHlInfo();
+    draw();
+  }
+});
+
+// ─── CIRCULAR CANVAS ─────────────────────────────────────────────
+const circCanvas = document.getElementById('circ-canvas');
+const circCtx = circCanvas.getContext('2d');
+const circTip = document.getElementById('circ-tip');
+
+function drawCirc() {
+  resizeCanvas(circCanvas);
+  const dpr = devicePixelRatio;
+  const W = circCanvas.width, H = circCanvas.height;
+  const ctx = circCtx;
+  ctx.clearRect(0, 0, W, H);
+  ctx.save();
+
+  const cx = W / 2, cy = H / 2;
+  const R = Math.min(W, H) * 0.33;
+  const labelR = R + 22 * dpr;
+  const nr = 7 * dpr;
+
+  const angles = nodes.map((_, i) => -Math.PI / 2 + (i / N) * Math.PI * 2);
+
+  function nx2(i) { return cx + R * Math.cos(angles[i]); }
+  function ny2(i) { return cy + R * Math.sin(angles[i]); }
+
+  // Faint ring guide
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  ctx.lineWidth = 1 * dpr;
+  ctx.stroke();
+
+  // Edges (bezier through softened center)
+  const maxSR = Math.max(...edges.map(e => e.SR));
+  edges.forEach(e => {
+    const i = e.from, j = e.to;
+    const isHl = highlightNode !== -1 && (i === highlightNode || j === highlightNode);
+    const val = getEdgeVal(e) / maxSR;
+    const alpha = isHl ? 0.9 : (highlightNode !== -1 ? 0.05 : 0.22);
+    const pull = 0.32;
+
+    const ax = nx2(i), ay = ny2(i), bx = nx2(j), by = ny2(j);
+    const c1x = cx + pull * (ax - cx), c1y = cy + pull * (ay - cy);
+    const c2x = cx + pull * (bx - cx), c2y = cy + pull * (by - cy);
+
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = isHl ? '#ff6b4a' : valueColor(val);
+    ctx.lineWidth = isHl ? 1.8 * dpr : (0.4 + val * 2) * dpr;
+    ctx.beginPath();
+    ctx.moveTo(ax, ay);
+    ctx.bezierCurveTo(c1x, c1y, c2x, c2y, bx, by);
+    ctx.stroke();
+
+    // Arrowhead
+    function bPt(t) {
+      return [
+        (1-t)**3*ax + 3*(1-t)**2*t*c1x + 3*(1-t)*t**2*c2x + t**3*bx,
+        (1-t)**3*ay + 3*(1-t)**2*t*c1y + 3*(1-t)*t**2*c2y + t**3*by
+      ];
+    }
+    const [px1, py1] = bPt(0.82), [px2, py2] = bPt(0.83);
+    const aang = Math.atan2(py2 - py1, px2 - px1);
+    const as = 5 * dpr;
+    ctx.beginPath();
+    ctx.moveTo(px2 + as * Math.cos(aang - 2.5), py2 + as * Math.sin(aang - 2.5));
+    ctx.lineTo(px2, py2);
+    ctx.lineTo(px2 + as * Math.cos(aang + 2.5), py2 + as * Math.sin(aang + 2.5));
+    ctx.stroke();
+    ctx.restore();
+  });
+
+  // Nodes
+  nodes.forEach((n, i) => {
+    const x = nx2(i), y = ny2(i);
+    const isHl = n.id === highlightNode;
+    const nv = normalizedVal(n);
+    const col = valueColor(nv);
+    const r2 = isHl ? 10 * dpr : nr;
+
+    if (isHl) {
+      ctx.beginPath();
+      ctx.arc(x, y, r2 + 5 * dpr, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,107,74,0.18)';
+      ctx.fill();
+    }
+
+    ctx.beginPath();
+    ctx.arc(x, y, r2, 0, Math.PI * 2);
+    ctx.fillStyle = col;
+    ctx.fill();
+    ctx.strokeStyle = isHl ? '#ff6b4a' : 'rgba(255,255,255,0.25)';
+    ctx.lineWidth = isHl ? 2 * dpr : 0.75 * dpr;
+    ctx.stroke();
+
+    ctx.fillStyle = '#fff';
+    ctx.font = `${isHl ? 500 : 400} ${8.5 * dpr}px DM Mono,monospace`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(n.id, x, y + 0.5 * dpr);
+
+    // External label
+    const lx = cx + labelR * Math.cos(angles[i]);
+    const ly = cy + labelR * Math.sin(angles[i]);
+    ctx.font = `${isHl ? 500 : 400} ${8 * dpr}px DM Mono,monospace`;
+    ctx.fillStyle = isHl ? '#ff6b4a' : 'rgba(255,255,255,0.28)';
+    ctx.textAlign = lx < cx - 4 * dpr ? 'right' : lx > cx + 4 * dpr ? 'left' : 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(n.id, lx, ly);
+  });
+
+  ctx.restore();
+}
+
+// Circ tooltip & interaction
+function circNodeAt(mx, my) {
+  const W = circCanvas.width, H = circCanvas.height;
+  const cx = W / 2, cy = H / 2;
+  const R = Math.min(W, H) * 0.33;
+  const angles = nodes.map((_, i) => -Math.PI / 2 + (i / N) * Math.PI * 2);
+  let found = null, minD = 14 * devicePixelRatio;
+  nodes.forEach((n, i) => {
+    const x = cx + R * Math.cos(angles[i]);
+    const y = cy + R * Math.sin(angles[i]);
+    const d = Math.hypot(mx * devicePixelRatio - x, my * devicePixelRatio - y);
+    if (d < minD) { minD = d; found = n; }
+  });
+  return found;
+}
+
+circCanvas.addEventListener('mousemove', e => {
+  const rect = circCanvas.getBoundingClientRect();
+  const found = circNodeAt(e.clientX - rect.left, e.clientY - rect.top);
+  if (found) {
+    circTip.style.display = 'block';
+    circTip.style.left = (e.clientX - rect.left + 14) + 'px';
+    circTip.style.top = (e.clientY - rect.top - 10) + 'px';
+    circTip.innerHTML = tooltipHTML(found);
+  } else {
+    circTip.style.display = 'none';
+  }
+});
+circCanvas.addEventListener('mouseleave', () => circTip.style.display = 'none');
+circCanvas.addEventListener('click', e => {
+  const rect = circCanvas.getBoundingClientRect();
+  const found = circNodeAt(e.clientX - rect.left, e.clientY - rect.top);
+  if (found) {
+    highlightNode = highlightNode === found.id ? -1 : found.id;
+    hsel.value = highlightNode;
+    updateHlInfo();
+    draw();
+  }
+});
+
+// ─── Tooltip HTML ─────────────────────────────────────────────────
+function tooltipHTML(n) {
+  const conn = edges.filter(e => e.from === n.id || e.to === n.id).length;
+  return `<b>Node ${n.id}</b>
+    <div class="tip-row"><span class="tip-key">TR</span><span class="tip-val">${n.TR.toFixed(4)}</span></div>
+    <div class="tip-row"><span class="tip-key">PR</span><span class="tip-val">${n.PR.toFixed(4)}</span></div>
+    <div class="tip-row"><span class="tip-key">SR</span><span class="tip-val">${n.SR.toFixed(4)}</span></div>
+    <div class="tip-row"><span class="tip-key">OR</span><span class="tip-val">${n.OR.toFixed(4)}</span></div>
+    <div class="tip-row" style="margin-top:4px;border-top:1px solid rgba(255,255,255,0.07);padding-top:4px"><span class="tip-key">edges</span><span class="tip-val">${conn}</span></div>`;
+}
+
+// ─── Draw & Resize ────────────────────────────────────────────────
+function draw() {
+  drawGeo();
+  drawCirc();
+}
+
+const ro = new ResizeObserver(() => draw());
+ro.observe(document.getElementById('geo-panel'));
+ro.observe(document.getElementById('circ-panel'));
+
+// Initial draw after fonts load
+document.fonts.ready.then(draw);
+
+// Set min-height for panels dynamically
+function setPanelHeight() {
+  const available = window.innerHeight - 160;
+  document.querySelector('.panels').style.height = Math.max(320, available) + 'px';
+}
+setPanelHeight();
+window.addEventListener('resize', setPanelHeight);
+</script>
+</body>
+</html>
